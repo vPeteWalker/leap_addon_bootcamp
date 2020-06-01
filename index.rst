@@ -1,30 +1,26 @@
-.. title:: Introduction to Nutanix AHV
+.. title:: Leap Add-on Bootcamp
 
 .. toctree::
   :maxdepth: 2
-  :caption: Leap Labs
-  :name: _leap_labs
+  :caption: Initial Setup
+  :name: _initial_setup
   :hidden:
 
-  onpremleap/onpremleap
+  onpremleap1_setup/onpremleap1_setup
 
 .. toctree::
   :maxdepth: 2
-  :caption: Example Labs
-  :name: _example_labs
+  :caption: Unplanned Failover (UPFO)
+  :name: _leap_UPFO
   :hidden:
 
-  examplelab1/examplelab1
-  examplelab2/examplelab2
-  examplelab3/examplelab3
+  onpremleap2_UPFO/onpremleap2_UPFO
 
 .. toctree::
   :maxdepth: 2
-  :caption: Optional Labs
-  :name: _optional_labs
+  :caption: [FUTURE] Planned Failover (PFO)
+  :name: _leap_PFO
   :hidden:
-
-  examplelab3/examplelab3
 
 .. toctree::
   :maxdepth: 2
@@ -35,7 +31,7 @@
   appendix/glossary
   appendix/otherstuff
 
-.. _getting_started:
+.. _initial_setup:
 
 ---------------
 Getting Started
