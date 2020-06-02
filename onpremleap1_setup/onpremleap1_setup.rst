@@ -1,8 +1,8 @@
-.. _onpremleap:
+.. _onpremleap1_setup:
 
------------------------------
-DR with AHV Sync Rep and Leap
------------------------------
+----------------------
+Setup and Requirements
+----------------------
 
 Nutanix AOS 5.17 offer significant enhancements to Leap for on-premises failover operations, including support for execution of guest scripts and synchronous replication with AHV.
 
@@ -22,6 +22,11 @@ Lab Requirements
 #. Configure a Primary (and optionally a Secondary) network within Prism, including IP Address Management (IPAM) on one or both networks. When utilizing the HPOC, both Primary and Secondary network information will be provided.
 
 #. Calm is enabled.
+
+Future
+++++++
+
+#. Add alternative instructions to deploying a multi-VM application via Calm (ex. customers/prospects interested in Leap, but do not own Calm)
 
 Calm configuration
 ===================
@@ -131,7 +136,7 @@ You can use Blueprints to model applications of various complexities; from simpl
 
 #. Click **Save**.
 
-#. There should be no remaining warnings or errors for the blueprint.
+#. Verify there should be no remaining warnings or errors for the blueprint.
 
 Deploy a multi-VM application via Calm
 ......................................
