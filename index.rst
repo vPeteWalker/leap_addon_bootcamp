@@ -20,13 +20,6 @@
   :name: onpremleap3_PFO/onpremleap3_PFO
   :hidden:
 
-.. toctree::
-  :maxdepth: 2
-  :caption: Appendix
-  :name: _appendix
-  :hidden:
-
-  appendix/glossary
-  appendix/otherstuff
+  onpremleap3_PFO/onpremleap3_PFO
 
 .. _onpremleap1_setup:

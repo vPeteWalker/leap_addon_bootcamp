@@ -15,8 +15,8 @@ Creating A Protection Policy
 
    - **Name** - *Initials*\ -FiestaProtection
    - **Primary Cluster(s)** - PrimarySite
-   - **Recovery Location** - PC_*SecondarySite IP*
-   - **Target Cluster** - SecondarySite
+   - **Recovery Location** - PC_*RecoverySite IP*
+   - **Target Cluster** - RecoverySite
    - Under **Policy Type**, select **Synchronous**
    - Under **Failure Handling**, select **Automatic**
    - **Timeout After** - 10 Seconds
@@ -100,13 +100,13 @@ Performing An Unplanned Failover
 
 Before performing our failover, we'll make a quick update to our application.
 
-#. Open http://<*Initials-WebServer-VM-IP-Address:5001*> in another browser tab.
+#. Open http://<*Initials-WebServer-VM-IP-Address*:5001> in another browser tab.
 
 #. Under **Stores**, click **Add New Store** and fill out the required fields. Validate your new store appears in the UI.
 
    .. figure:: images/16.png
 
-#. Log in to Prism Central for your **SecondarySite** (NOT YOUR **PrimarySite** CLUSTER) at https://10.38.173.40:9440/ using the following credentials:
+#. Log in to Prism Central for your **RecoverySite** (NOT YOUR **PrimarySite** CLUSTER) at https://10.38.173.40:9440/ using the following credentials:
 
    - **Username** - admin
    - **Password** - emeaX2020!
@@ -129,6 +129,6 @@ Before performing our failover, we'll make a quick update to our application.
 
 #. Once the Recovery Plan reaches 100%, open :fa:`bars` **> Virtual Infrastructure > VMs** and note the *new* IP Address of your *Initials*\ **-WebServer-...**.
 
-#. Open http://<*Initials-WebServer-VM-NEW-IP-Address:5001*> in another browser tab and verify the change you'd made to your application is present.
+#. Open http://<*Initials-WebServer-VM-NEW-IP-Address*:5001> in another browser tab and verify the change you'd made to your application is present.
 
 Congratulations! You've completed your first DR failover with Nutaix AHV, leveraging native Leap runbook capabilities and synchronous replication.

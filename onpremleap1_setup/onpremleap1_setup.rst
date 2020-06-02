@@ -11,15 +11,45 @@ Nutanix AOS 5.17 offer significant enhancements to Leap for on-premises failover
 Lab Requirements
 ++++++++++++++++
 
-#. Two clusters - each running AOS and PC 5.17 or later.
+#. Two AHV clusters running AOS 5.17 or newer, each registered to a different Prism Central.
 
-#. Each cluster has a Data Services IP configured within Prism.
+#. The on-prem clusters must be running AHV version 20190916.189 or newer.
+
+#. The storage container name of the protected VMs must be the same on both the primary and recovery clusters. Therefore, a storage container must exist on the recovery cluster with the same name as the one on the primary cluster. For example, if the protected VMs are in the SelfServiceContainer storage container on the primary cluster, there must also be a SelfServiceContainer storage container on the recovery cluster.
+
+#. The clusters on the primary availability zone (site) and the recovery site communicate over the ports 2030, 2036, 2073, and 2090. Ensure that these ports have open access between both the primary cluster and recovery clusters (Prism Elements). For more information about the required ports, see General Requirements of Leap.
+
+.. note::
+
+   **CONFIRM THIS** This step is not necessary if using two HPOC clusters in the same datacenter
+
+   ::
+      nutanix@cvm$ allssh 'modify_firewall -f -r remote_cvm_ip,remote_virtual_ip -p 2030,2036,2073,2090 -i eth0'
+
+   - Replace *remote_cvm_ip* with the IP address of the recovery cluster CVM.
+
+   - Replace *remote_virtual_ip* with the virtual IP address of the recovery cluster.
+
+#. To open the ports for communication on the recovery cluster, run the following command on any CVM of the primary cluster.
+
+::
+   nutanix@cvm$ allssh 'modify_firewall -f -r source_cvm_ip,source_virtual_ip -p 2030,2036,2073,2090 -i eth0'
+
+   - Replace *source_cvm_ip* with the IP address of the primary cluster CVM.
+
+   - Replace *source_virtual_ip* with the virtual IP address of the primary cluster.
+
+#. Set the virtual IP address and the data services IP address in the primary and the recovery clusters.
 
 #. If you are using the HPOC environment, reserve two clusters in the same datacenter to ensure synchronous replication latency requirements are met **LINK TO SYNC REQUIREMENTS**.
 
-#. Designate one cluster as *PrimarySite*, and one as *SecondarySite*. Recommend you rename each cluster within Prism to aid with identification during this lab.
+#. Designate one cluster as *PrimarySite*, and one as *RecoverySite*. Recommend you rename each cluster within Prism to aid with identification during this lab.
 
-#. Configure a Primary (and optionally a Secondary) network within Prism, including IP Address Management (IPAM) on one or both networks. When utilizing the HPOC, both Primary and Secondary network information will be provided.  **HOW MANY PEOPLE CAN DO THE LAB BASED ON # OF IPS?**
+#. Configure a Primary (and optionally a Secondary) network within Prism, including IP Address Management (IPAM) on one or both networks. This lab requires 2 IP addresses per attendee, per physical cluster (2 at the Primary site, 2 at the Recovery site).
+
+.. note::
+
+   When utilizing the HPOC, both Primary and Secondary network information will be provided with your reservation.
 
 #. Calm is enabled.
 
@@ -179,7 +209,7 @@ Deploy a multi-VM application via Calm
 
 #. On the **Services** tab, select the **NodeReact** service and note the IP Address. This is the web server hosting the front end of your application.
 
-#. Open http://<*NodeReact-VM-IP-Address:5001*> in a new browser tab and validate you can access the Fiesta Inventory Management app.
+#. Open http://<*NodeReact-VM-IP-Address:*5001> in a new browser tab and validate you can access the Fiesta Inventory Management app.
 
    .. figure:: images/5.png
 
@@ -239,7 +269,7 @@ Installing Nutanix Guest Tools
 Staging Guest Script
 ++++++++++++++++++++
 
-New in 5.17, Leap allows you to execute scripts within a guest to update configuration files or perform other critical functions as part of the runbook. In this exercise you'll stage a script on your WebServer VM that will update its configuration file responsible for the MySQL VM connection, allowing the WebServer to connect to the MySQL database after failover to our **SecondarySite** network.
+New in 5.17, Leap allows you to execute scripts within a guest to update configuration files or perform other critical functions as part of the runbook. In this exercise you'll stage a script on your WebServer VM that will update its configuration file responsible for the MySQL VM connection, allowing the WebServer to connect to the MySQL database after failover to our **RecoverySite** network.
 
 #. SSH into your *Initials*\ **-WebServer-...** VM using the following credentials:
 
@@ -261,22 +291,21 @@ New in 5.17, Leap allows you to execute scripts within a guest to update configu
 Creating a new Availability Zone
 ++++++++++++++++++++++++++++++++
 
-   .. note::
-
-      Creating an Availability Zone (AZ) can only be done once per set of physical clusters, and should be done by an instructor, so that all participants can experience the process documented below.
-
 #. Log in to Prism Central for your **PrimarySite** cluster.
 
 #. Open :fa:`bars` **> Administration > Availability Zones** and observe that a Local AZ has already been created by default. Click **Connect to Availability Zone**
 
 .. figure:: images/AZ/1.png
 
-#. In the *Availability Zone Type* dropdown, select **Physical Location**. Enter the IP, username, and password for the **SecondarySite** PC, and click **Connect**.
+#. In the *Availability Zone Type* dropdown, select **Physical Location**. Enter the IP, username, and password for the **RecoverySite** PC, and click **Connect**.
 
 .. figure:: images/AZ/2.png
 
 .. figure:: images/AZ/3.png
 
-#. Observe that the **SecondarySite** cluster is now listed as *Physical*, and its *Connectivity Status* is listed as *Reachable*
+#. Observe that the **RecoverySite** cluster is now listed as *Physical*, and its *Connectivity Status* is listed as *Reachable*
 
-MOVE ONTO NEXT PART - ADD LINK HERE
+Creating a new Availability Zone
+++++++++++++++++++++++++++++++++
+
+**MOVE ONTO NEXT PART - ADD LINK HERE**
