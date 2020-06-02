@@ -1,8 +1,8 @@
-.. _onpremleap:
+.. _onpremleap3_PFO:
 
------------------------------
-DR with AHV Sync Rep and Leap
------------------------------
+-----------------------------------
+[FUTURE] Planned Failover with Leap
+-----------------------------------
 
 The upcoming Nutanix AOS 5.17 release will offer significant enhancements to Leap for on-premises failover operations, including support for execution of guest scripts and synchronous replication with AHV.
 
