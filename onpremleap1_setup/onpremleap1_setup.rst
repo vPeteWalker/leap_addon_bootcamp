@@ -15,7 +15,7 @@ Leap Requirements
 
 #. The on-prem clusters must be running AHV version 20190916.189 or newer.
 
-#. The storage container name of the protected VMs must be the same on both the primary and recovery clusters. Therefore, a storage container must exist on the recovery cluster with the same name as the one on the primary cluster. For example, if the protected VMs are in the SelfServiceContainer storage container on the primary cluster, there must also be a SelfServiceContainer storage container on the recovery cluster.
+#. The storage container name of the protected VMs must be the same on both the primary and recovery clusters. Therefore, a storage container must exist on the recovery cluster with the same name as the one on the primary cluster. For example, if the protected VMs are in the *SelfServiceContainer* storage container on the primary cluster, there must also be a *SelfServiceContainer* storage container on the recovery cluster.
 
 #. The clusters on the primary availability zone (site) and the recovery site communicate over the ports 2030, 2036, 2073, and 2090. Ensure that these ports have open access between both the primary cluster and recovery clusters (Prism Elements). For more information about the required ports, see General Requirements of Leap.
 
@@ -33,13 +33,12 @@ Leap Requirements
 
 #. To open the ports for communication on the recovery cluster, run the following command on any CVM of the primary cluster.
 
-   ::
+::
+   nutanix@cvm$ allssh 'modify_firewall -f -r source_cvm_ip,source_virtual_ip -p 2030,2036,2073,2090 -i eth0'
 
-      nutanix@cvm$ allssh 'modify_firewall -f -r source_cvm_ip,source_virtual_ip -p 2030,2036,2073,2090 -i eth0'
+- Replace *source_cvm_ip* with the IP address of the primary cluster CVM.
 
-   - Replace *source_cvm_ip* with the IP address of the primary cluster CVM.
-
-   - Replace *source_virtual_ip* with the virtual IP address of the primary cluster.
+- Replace *source_virtual_ip* with the virtual IP address of the primary cluster.
 
 #. Set the virtual IP address and the data services IP address in the primary and the recovery clusters.
 
