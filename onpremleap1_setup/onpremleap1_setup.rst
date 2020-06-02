@@ -21,7 +21,7 @@ Leap Requirements
 
 .. note::
 
-   **CONFIRM THIS** This step is not necessary if using two HPOC clusters in the same datacenter
+   This step is not necessary if using two HPOC clusters in the same datacenter **NEEDS TO BE CONFIRMED**
 
    ::
 
