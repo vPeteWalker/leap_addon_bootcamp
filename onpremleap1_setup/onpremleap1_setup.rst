@@ -24,6 +24,7 @@ Leap Requirements
    **CONFIRM THIS** This step is not necessary if using two HPOC clusters in the same datacenter
 
    ::
+
       nutanix@cvm$ allssh 'modify_firewall -f -r remote_cvm_ip,remote_virtual_ip -p 2030,2036,2073,2090 -i eth0'
 
    - Replace *remote_cvm_ip* with the IP address of the recovery cluster CVM.
@@ -32,8 +33,9 @@ Leap Requirements
 
 #. To open the ports for communication on the recovery cluster, run the following command on any CVM of the primary cluster.
 
-::
-   nutanix@cvm$ allssh 'modify_firewall -f -r source_cvm_ip,source_virtual_ip -p 2030,2036,2073,2090 -i eth0'
+   ::
+
+      nutanix@cvm$ allssh 'modify_firewall -f -r source_cvm_ip,source_virtual_ip -p 2030,2036,2073,2090 -i eth0'
 
    - Replace *source_cvm_ip* with the IP address of the primary cluster CVM.
 
@@ -91,8 +93,13 @@ Synchronous Replication Limitations
    - VMs with incompatible GPUs on the recovery cluster are not supported.
    - Only unplanned failover is supported.
 
-Future
-++++++
+Synchronous Replication Recommendation
+++++++++++++++++++++++++++++++++++++++
+
+   - For optimal performance, Nutanix recommends that the round trip latency (RTT) between clusters be less than 5 ms. Maintain adequate bandwidth to accommodate peak writes and have a redundant physical network between the clusters.
+
+Future Additions
+++++++++++++++++
 
 #. Add alternative instructions to deploying a multi-VM application via Calm (ex. customers/prospects interested in Leap, but do not own Calm)
 
