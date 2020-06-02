@@ -3,7 +3,7 @@
 .. toctree::
   :maxdepth: 2
   :caption: Initial Setup
-  :name: _initial_setup
+  :name: _onpremleap1_setup/onpremleap1_setup
   :hidden:
 
   onpremleap1_setup/onpremleap1_setup
@@ -11,7 +11,7 @@
 .. toctree::
   :maxdepth: 2
   :caption: Unplanned Failover (UPFO)
-  :name: _leap_UPFO
+  :name: onpremleap2_UPFO/onpremleap2_UPFO
   :hidden:
 
   onpremleap2_UPFO/onpremleap2_UPFO
@@ -19,7 +19,7 @@
 .. toctree::
   :maxdepth: 2
   :caption: [FUTURE] Planned Failover (PFO)
-  :name: _leap_PFO
+  :name: onpremleap3_PFO/onpremleap3_PFO
   :hidden:
 
 .. toctree::
