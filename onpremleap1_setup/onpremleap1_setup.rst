@@ -8,8 +8,8 @@ Nutanix AOS 5.17 offer significant enhancements to Leap for on-premises failover
 
 **In this lab you deploy a multi-tier application, protect your VMs, build a Recovery Plan for runbook automation, and perform a failover operation to another Nutanix cluster.**
 
-Lab Requirements
-++++++++++++++++
+Leap Requirements
++++++++++++++++++
 
 #. Two AHV clusters running AOS 5.17 or newer, each registered to a different Prism Central.
 
@@ -41,9 +41,12 @@ Lab Requirements
 
 #. Set the virtual IP address and the data services IP address in the primary and the recovery clusters.
 
+Lab Requirements
+++++++++++++++++
+
 #. If you are using the HPOC environment, reserve two clusters in the same datacenter to ensure synchronous replication latency requirements are met **LINK TO SYNC REQUIREMENTS**.
 
-#. Designate one cluster as *PrimarySite*, and one as *RecoverySite*. Recommend you rename each cluster within Prism to aid with identification during this lab.
+#. Designate one cluster as *PrimarySite*, and one as *RecoverySite*. We recommend you rename each cluster within Prism to aid with identification during this lab.
 
 #. Configure a Primary (and optionally a Secondary) network within Prism, including IP Address Management (IPAM) on one or both networks. This lab requires 2 IP addresses per attendee, per physical cluster (2 at the Primary site, 2 at the Recovery site).
 
