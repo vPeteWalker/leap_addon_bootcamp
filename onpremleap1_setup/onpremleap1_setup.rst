@@ -56,26 +56,40 @@ Lab Requirements
 
 #. Calm is enabled.
 
-Limitations
-+++++++++++
+Leap Limitations
+++++++++++++++++
 
 (As of June 2nd, 2020)
 
 #. Planned for 5.17.1
-   Test Failover
-   Planned Failover
+   - Test Failover Planned Failover
 
 #. Not supported
-   Volume Groups (Planned 5.21)
-   Files (Planned 5.19+)
-   Single PC (Planned 5.19)
-   Automatic resumption from outage when Automatic Failure Handling is set.
-   1-node and 2-node configurations
-   Multi-site Sync Rep
-   Multi-site Sync + NearSync/Async
+   - Volume Groups (Planned 5.21)
+   - Files (Planned 5.19+)
+   - Single PC (Planned 5.19)
+   - Automatic resumption from outage when Automatic Failure Handling is set
+   - 1-node and 2-node configurations
+   - Multi-site Sync Rep Multi-site Sync + NearSync/Async
 
-AHV Sync-Rep FAQ
+AHV Sync-Rep FAQ [**INTERNAL LINK**]
 #. https://docs.google.com/document/d/1jqJ8bENTS8LW0oAOezXlucgB9Zfylj6n5HupeJUOE5s/edit?ts=5e7b7d65
+
+Synchronous Replication Limitations
++++++++++++++++++++++++++++++++++++
+
+.. note::
+
+   These limitations are in addition to the general limitations of Leap.
+
+(As of June 2nd, 2020)
+
+   - Volume Groups (VGs) are not supported.
+   - Witness VMs are not supported.
+   - VMs that are configured as part of a network function chain are not supported.
+   - VMs with affinity policies are not supported.
+   - VMs with incompatible GPUs on the recovery cluster are not supported.
+   - Only unplanned failover is supported.
 
 Future
 ++++++
