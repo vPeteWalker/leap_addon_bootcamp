@@ -56,6 +56,12 @@ Lab Requirements
 
    When utilizing the HPOC, both Primary and Secondary network information will be provided with your reservation.
 
+.. note::
+
+   Recommended IPAM pools when using HPOC
+   - Primary   -  .50 - .126, IPAM DHCP - .126 (76 available IPs)
+   - Secondary - .132 - .254, IPAM DHCP - .254 (122 available IPs)
+
 #. Calm is enabled.
 
 Leap Limitations
@@ -96,7 +102,7 @@ Synchronous Replication Limitations
 Synchronous Replication Recommendation
 ++++++++++++++++++++++++++++++++++++++
 
-   - For optimal performance, Nutanix recommends that the round trip latency (RTT) between clusters be less than 5 ms. Maintain adequate bandwidth to accommodate peak writes and have a redundant physical network between the clusters.
+#. For optimal performance, Nutanix recommends that the round trip latency (RTT) between clusters be less than 5 ms. Maintain adequate bandwidth to accommodate peak writes and have a redundant physical network between the clusters.
 
 Future Additions
 ++++++++++++++++
