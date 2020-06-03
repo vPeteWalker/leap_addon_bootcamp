@@ -43,7 +43,7 @@ Lab Requirements
 
 #. Designate one cluster as *PrimarySite*, and one as *RecoverySite*. We recommend you rename each cluster within Prism to aid with identification during this lab.
 
-#. Configure a Primary (and optionally a Secondary) network within Prism, including IP Address Management (IPAM) on one or both networks. This lab requires 2 IP addresses per attendee, per physical cluster (2 at the Primary site, 2 at the Recovery site).
+#. Configure a Primary (and optionally a Secondary) network within Prism, including IP Address Management (IPAM) on one or both networks, including DNS, and an IP Pool. This lab requires 2 IP addresses per attendee, per physical cluster (2 at the Primary site, 2 at the Recovery site).
 
 .. note::
 
@@ -191,6 +191,8 @@ You can use Blueprints to model applications of various complexities; from simpl
       dQr/JBzLBUjCOBVuUuH3uW7hGhW+DnlzrfbfJATaRR8Ht6VU651T+Gbrr8EqNpCP
       gmznERCNf9Kaxl/hlyV5dZBe/2LIK+/jLGNu9EJLoraaCBFshJKF
       -----END RSA PRIVATE KEY-----
+
+#. Click **+ Add Passphrase**. Within the *Passphrase* text box, enter *nutanix/4u* as the password.
 
 #. Click **Save** and click **Back** once the Blueprint has completed saving.
 
