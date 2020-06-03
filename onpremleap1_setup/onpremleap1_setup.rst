@@ -23,15 +23,7 @@ Leap Requirements
 
    This step is not necessary if using two HPOC clusters in the same datacenter **NEEDS TO BE CONFIRMED**
 
-   ::
-
-      nutanix@cvm$ allssh 'modify_firewall -f -r remote_cvm_ip,remote_virtual_ip -p 2030,2036,2073,2090 -i eth0'
-
-   - Replace *remote_cvm_ip* with the IP address of the recovery cluster CVM.
-
-   - Replace *remote_virtual_ip* with the virtual IP address of the recovery cluster.
-
-#. To open the ports for communication on the recovery cluster, run the following command on any CVM of the primary cluster.
+To open the ports for communication on the recovery cluster, run the following command on any CVM of the primary cluster.
 
 ::
    nutanix@cvm$ allssh 'modify_firewall -f -r source_cvm_ip,source_virtual_ip -p 2030,2036,2073,2090 -i eth0'
