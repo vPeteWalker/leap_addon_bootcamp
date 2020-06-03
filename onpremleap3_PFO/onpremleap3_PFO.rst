@@ -104,7 +104,7 @@ Performing An Unplanned Failover
 
 Before performing our failover, we'll make a quick update to our application.
 
-#. Open http://<*Initials-WebServer-VM-IP-Address*:5001> in another browser tab.
+#. Open http://*Initials-WebServer-VM-IP-Address*:5001 in another browser tab.
 
 #. Under **Stores**, click **Add New Store** and fill out the required fields. Validate your new store appears in the UI.
 

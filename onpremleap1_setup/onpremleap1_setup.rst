@@ -148,15 +148,11 @@ You can use Blueprints to model applications of various complexities; from simpl
 
 #. Update the **Blueprint Name** to include your initials. Even across different projects, Calm Blueprint names must be unique.
 
-#. Select your Calm project and click **Upload**.
+#. Select your *Initials*\ -FiestaProject project and click **Upload**.
 
    .. figure:: images/Calm/26.png
 
 #. In order to launch the Blueprint you must first assign a network to the VM. Select the **NodeReact** Service, and in the **VM** Configuration menu on the right, select *Your Preferred Network* as the **NIC 1** network.
-
-#. Specify the *Initials*\ **-Team: Fiesta** and **Environment: Dev** categories for the **NodeReact** Service.
-
-   .. figure:: images/Calm/27.png
 
 #. Repeat the **NIC 1** and **Category** assignment for the **MySQL** Service.
 
@@ -230,7 +226,7 @@ Deploy a multi-VM application via Calm
 
 #. On the **Services** tab, select the **NodeReact** service and note the IP Address. This is the web server hosting the front end of your application.
 
-#. Open http://<*NodeReact-VM-IP-Address:*5001> in a new browser tab and validate you can access the Fiesta Inventory Management app.
+#. Open http://*NodeReact-VM-IP-Address*:5001 in a new browser tab and validate you can access the Fiesta Inventory Management app.
 
    .. figure:: images/5.png
 
