@@ -17,6 +17,8 @@ Leap Requirements
 
 #. The storage container name of the protected VMs must be the same on both the primary and recovery clusters. Therefore, a storage container must exist on the recovery cluster with the same name as the one on the primary cluster. For example, if the protected VMs are in the *SelfServiceContainer* storage container on the primary cluster, there must also be a *SelfServiceContainer* storage container on the recovery cluster.
 
+#. Set the virtual IP address and the data services IP address in the primary and the recovery clusters.
+
 #. The clusters on the primary availability zone (site) and the recovery site communicate over the ports 2030, 2036, 2073, and 2090. Ensure that these ports have open access between both the primary cluster and recovery clusters (Prism Elements). For more information about the required ports, see General Requirements of Leap.
 
 .. note::
@@ -32,10 +34,10 @@ To open the ports for communication on the recovery cluster, run the following c
 
 - Replace *source_virtual_ip* with the virtual IP address of the primary cluster.
 
-#. Set the virtual IP address and the data services IP address in the primary and the recovery clusters.
-
 Lab Requirements
 ++++++++++++++++
+
+#. Calm is enabled.
 
 #. If you are using the HPOC environment, reserve two clusters in the same datacenter to ensure synchronous replication latency requirements are met **LINK TO SYNC REQUIREMENTS**.
 
@@ -50,10 +52,8 @@ Lab Requirements
 .. note::
 
    Recommended IPAM pools when using HPOC
-   - Primary   -  .50 - .126, IPAM DHCP - .126 (76 available IPs)
-   - Secondary - .132 - .254, IPAM DHCP - .254 (122 available IPs)
-
-#. Calm is enabled.
+   - Primary   -  .50 - .125, IPAM DHCP - .126 (76 available IPs)
+   - Secondary - .132 - .253, IPAM DHCP - .254 (122 available IPs)
 
 Leap Limitations
 ++++++++++++++++
@@ -264,20 +264,20 @@ Installing Nutanix Guest Tools
 
          Nutanix Calm currently supports automatic installation of NGT for single VM blueprints, and plans to support multi-VM blueprints in the future.
 
-      #. SSH into your *Initials*\ **-WebServer-...** VM using the following credentials:
-
-         - **User Name** - centos
-         - **Password** - nutanix/4u
-
-      #. Within the VM SSH session, execute the following to install NGT:
-
-         .. code-block:: bash
-
-            sudo mount /dev/sr0 /mnt
-            sudo /mnt/installer/linux/install_ngt.py
-            sudo reboot
-
-      #. Repeat **Steps 8-9** with your *Initials*\ **-MySQL-...** VM.
+      .. #. SSH into your *Initials*\ **-WebServer-...** VM using the following credentials:
+      ..
+      ..    - **User Name** - centos
+      ..    - **Password** - nutanix/4u
+      ..
+      .. #. Within the VM SSH session, execute the following to install NGT:
+      ..
+      ..    .. code-block:: bash
+      ..
+      ..       sudo mount /dev/sr0 /mnt
+      ..       sudo /mnt/installer/linux/install_ngt.py
+      ..       sudo reboot
+      ..
+      .. #. Repeat **Steps 8-9** with your *Initials*\ **-MySQL-...** VM.
 
 #. Once both VMs have rebooted, validate both VMs now have empty CD-ROM drives and **NGT Status** displays **Latest** in Prism Central.
 
@@ -321,8 +321,5 @@ Creating a new Availability Zone
 .. figure:: images/AZ/3.png
 
 #. Observe that the **RecoverySite** cluster is now listed as *Physical*, and its *Connectivity Status* is listed as *Reachable*
-
-Creating a new Availability Zone
-++++++++++++++++++++++++++++++++
 
 **MOVE ONTO NEXT PART - ADD LINK HERE**
