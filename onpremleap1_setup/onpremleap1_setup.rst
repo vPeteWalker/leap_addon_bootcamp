@@ -28,6 +28,7 @@ Leap Requirements
 To open the ports for communication on the recovery cluster, run the following command on any CVM of the primary cluster.
 
 ::
+
    nutanix@cvm$ allssh 'modify_firewall -f -r source_cvm_ip,source_virtual_ip -p 2030,2036,2073,2090 -i eth0'
 
 - Replace *source_cvm_ip* with the IP address of the primary cluster CVM.
@@ -39,7 +40,9 @@ Lab Requirements
 
 #. Calm is enabled.
 
-#. If you are using the HPOC environment, reserve two clusters in the same datacenter to ensure synchronous replication latency requirements are met **LINK TO SYNC REQUIREMENTS**.
+#. Leap is enabled.
+
+#. If you are using the HPOC environment, reserve two clusters in the same datacenter to ensure synchronous replication latency recommendations are met.
 
 #. Designate one cluster as *PrimarySite*, and one as *RecoverySite*. We recommend you rename each cluster within Prism to aid with identification during this lab.
 
@@ -52,7 +55,9 @@ Lab Requirements
 .. note::
 
    Recommended IPAM pools when using HPOC
+
    - Primary   -  .50 - .125, IPAM DHCP - .126 (76 available IPs)
+
    - Secondary - .132 - .253, IPAM DHCP - .254 (122 available IPs)
 
 Leap Limitations
@@ -65,14 +70,20 @@ Leap Limitations
 
 #. Not supported
    - Volume Groups (Planned 5.21)
+
    - Files (Planned 5.19+)
+
    - Single PC (Planned 5.19)
+
    - Automatic resumption from outage when Automatic Failure Handling is set
+
    - 1-node and 2-node configurations
+
    - Multi-site Sync Rep Multi-site Sync + NearSync/Async
 
 AHV Sync-Rep FAQ [**INTERNAL LINK**]
-#. https://docs.google.com/document/d/1jqJ8bENTS8LW0oAOezXlucgB9Zfylj6n5HupeJUOE5s/edit?ts=5e7b7d65
+
+https://docs.google.com/document/d/1jqJ8bENTS8LW0oAOezXlucgB9Zfylj6n5HupeJUOE5s/edit?ts=5e7b7d65
 
 Synchronous Replication Limitations
 +++++++++++++++++++++++++++++++++++
@@ -84,23 +95,30 @@ Synchronous Replication Limitations
 (As of June 2nd, 2020)
 
    - Volume Groups (VGs) are not supported.
+
    - Witness VMs are not supported.
+
    - VMs that are configured as part of a network function chain are not supported.
+
    - VMs with affinity policies are not supported.
+
    - VMs with incompatible GPUs on the recovery cluster are not supported.
+
    - Only unplanned failover is supported.
 
 Synchronous Replication Recommendation
 ++++++++++++++++++++++++++++++++++++++
 
-#. For optimal performance, Nutanix recommends that the round trip latency (RTT) between clusters be less than 5 ms. Maintain adequate bandwidth to accommodate peak writes and have a redundant physical network between the clusters.
+   - For optimal performance, Nutanix recommends that the round trip latency (RTT) between clusters be less than 5 ms. Maintain adequate bandwidth to accommodate peak writes and have a redundant physical network between the clusters.
 
 Future Additions
 ++++++++++++++++
 
-#. Add alternative instructions to deploying a multi-VM application via Calm (ex. customers/prospects interested in Leap, but do not own Calm)
+   - Implement staging to automate aspects of the setup process: Network creation, deployment of PC, enable Calm/Leap, deploy Calm blueprint for specified number of users, etc.
 
-#. Add Windows-based activity
+   - Add alternative instructions to deploying a multi-VM application via Calm (ex. customers/prospects interested in Leap, but do not own Calm)
+
+   - Add Windows-based activity
 
 Calm configuration
 ++++++++++++++++++
@@ -192,23 +210,9 @@ You can use Blueprints to model applications of various complexities; from simpl
       gmznERCNf9Kaxl/hlyV5dZBe/2LIK+/jLGNu9EJLoraaCBFshJKF
       -----END RSA PRIVATE KEY-----
 
-#. Click **+ Add Passphrase**. Within the *Passphrase* text box, enter *nutanix/4u* as the password.
+#.
 
 #. Click **Save** and click **Back** once the Blueprint has completed saving.
-
-#. Click on **AHV** in the lower left corner.
-
-   .. figure:: images/Calm/1.png
-
-#. Expand the **db_password** entry within the *Application Profile Name* area, along the right hand side.
-
-   .. figure:: images/Calm/2.png
-
-     .. Within the *Value* text box, enter *nutanix/4u* as the password.
-
-#. Click **Save**.
-
-#. Verify no remaining warnings or errors are present for the blueprint before proceeding.
 
 Deploy a multi-VM application via Calm
 ......................................
