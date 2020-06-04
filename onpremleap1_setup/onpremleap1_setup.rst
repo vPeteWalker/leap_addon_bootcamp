@@ -25,15 +25,25 @@ Leap Requirements
 
    This step is not necessary if using two HPOC clusters in the same datacenter **NEEDS TO BE CONFIRMED**
 
-To open the ports for communication on the recovery cluster, run the following command on any CVM of the primary cluster.
+- To open the ports for communication on the primary cluster, run the following command on any CVM of the **recovery** cluster.
+
+::
+
+   nutanix@cvm$ allssh 'modify_firewall -f -r remote_cvm_ip,remote_virtual_ip -p 2030,2036,2073,2090 -i eth0'
+
+   - Replace *remote_cvm_ip* with the IP address of the recovery cluster CVM.
+
+   - Replace *remote_virtual_ip* with the virtual IP address of the recovery cluster.
+
+- To open the ports for communication on the recovery cluster, run the following command on any CVM of the **primary** cluster.
 
 ::
 
    nutanix@cvm$ allssh 'modify_firewall -f -r source_cvm_ip,source_virtual_ip -p 2030,2036,2073,2090 -i eth0'
 
-- Replace *source_cvm_ip* with the IP address of the primary cluster CVM.
+   - Replace *source_cvm_ip* with the IP address of the primary cluster CVM.
 
-- Replace *source_virtual_ip* with the virtual IP address of the primary cluster.
+   - Replace *source_virtual_ip* with the virtual IP address of the primary cluster.
 
 Lab Requirements
 ++++++++++++++++
@@ -56,9 +66,15 @@ Lab Requirements
 
    Recommended IPAM pools when using HPOC
 
-   - Primary   -  .50 - .125, IPAM DHCP - .126 (76 available IPs)
+   - Primary
+      - Range = .50 - .125
+      - IPAM DHCP = .126
+      - (76 available IPs)
 
-   - Secondary - .132 - .253, IPAM DHCP - .254 (122 available IPs)
+   - Secondary
+      - Range = .132 - .253
+      - IPAM DHCP = .254
+      - (122 available IPs)
 
 Leap Limitations
 ++++++++++++++++
@@ -69,6 +85,7 @@ Leap Limitations
    - Test Failover Planned Failover
 
 #. Not supported
+
    - Volume Groups (Planned 5.21)
 
    - Files (Planned 5.19+)
@@ -82,8 +99,14 @@ Leap Limitations
    - Multi-site Sync Rep Multi-site Sync + NearSync/Async
 
 AHV Sync-Rep FAQ [**INTERNAL LINK**]
+++++++++++++++++++++++++++++++++++++
 
 https://docs.google.com/document/d/1jqJ8bENTS8LW0oAOezXlucgB9Zfylj6n5HupeJUOE5s/edit?ts=5e7b7d65
+
+Xi Leap Admin Guide
++++++++++++++++++++
+
+https://portal.nutanix.com/page/documents/details/?targetId=Xi-Leap-Admin-Guide%3AXi-Leap-Admin-Guide
 
 Synchronous Replication Limitations
 +++++++++++++++++++++++++++++++++++
@@ -145,7 +168,7 @@ Calm configuration
 
 #. Click **Save & Configure Environment**.
 
-``This will redirect you to the Envrionments page, but there is nothing needed to configure here. You may now move on to the next step.``
+This will redirect you to the Envrionments page, but there is nothing needed to configure here. You may now move on to the next step.
 
 Staging Blueprints
 ..................
@@ -154,7 +177,7 @@ A Blueprint is the framework for every application that you model by using Nutan
 
 You can use Blueprints to model applications of various complexities; from simply provisioning a single virtual machine to provisioning and managing a multi-node, multi-tier application.
 
-#. `Download the Fiesta-Multi Blueprint by right-clicking here <https://raw.githubusercontent.com/nutanixworkshops/ts2020/master/pc/dayinlife/Fiesta-Multi.json>`_.
+#. `Download the Fiesta-Multi Blueprint by right-clicking here <https://github.com/vPeteWalker/leap_addon_bootcamp/raw/master/Fiesta-Multi-GITHUB.json>`_.
 
 #. Log in to Prism Central for your **PrimarySite** cluster.
 
@@ -162,7 +185,7 @@ You can use Blueprints to model applications of various complexities; from simpl
 
    .. figure:: images/Calm/25.png
 
-#. Select **Fiesta-Multi.json**.
+#. Select **Fiesta-Multi-GITHUB.json**.
 
 #. Update the **Blueprint Name** to include your initials. Even across different projects, Calm Blueprint names must be unique.
 
@@ -172,13 +195,19 @@ You can use Blueprints to model applications of various complexities; from simpl
 
 #. In order to launch the Blueprint you must first assign a network to the VM. Select the **NodeReact** Service, and in the **VM** Configuration menu on the right, select *Your Preferred Network* as the **NIC 1** network.
 
-#. Repeat the **NIC 1** and **Category** assignment for the **MySQL** Service.
+   .. figure:: images/Calm/27.png
+
+#. Repeat the **NIC 1** assignment for the **MySQL** Service.
+
+#. Expand the *db_password* section, and within the *Value* entry, type *nutanix/4u* as the password.
+
+   .. figure:: images/Calm/db_password.png
 
 #. Click **Credentials** to define a private key used to authenticate to the CentOS VM that will be provisioned by the Blueprint.
 
    .. figure:: images/Calm/27b.png
 
-#. Expand the **CENTOS** credential and use your preferred SSH key, or paste in the following value as the **SSH Private Key**:
+#. Expand the **CENTOS** credential and paste in the following value as the **SSH Private Key**:
 
    ::
 
@@ -210,8 +239,6 @@ You can use Blueprints to model applications of various complexities; from simpl
       gmznERCNf9Kaxl/hlyV5dZBe/2LIK+/jLGNu9EJLoraaCBFshJKF
       -----END RSA PRIVATE KEY-----
 
-#.
-
 #. Click **Save** and click **Back** once the Blueprint has completed saving.
 
 Deploy a multi-VM application via Calm
@@ -226,7 +253,9 @@ Deploy a multi-VM application via Calm
 #. Fill out the following fields and then click **Create** to begin provisioning your application:
 
    - **Name of the Application** - *Initials*\ -FiestaApp
-   - **UserInitials** - *Initials*
+   - **user_initials** - *Initials*
+
+.. figure:: images/Calm/BPinitials.png
 
 #. Monitor the status of the application in the **Audit** tab and proceed once your application enters a **Running** state.
 
