@@ -21,11 +21,9 @@ Leap Requirements
 
 #. The clusters on the primary availability zone (site) and the recovery site communicate over the ports 2030, 2036, 2073, and 2090. Ensure that these ports have open access between both the primary cluster and recovery clusters (Prism Elements). For more information about the required ports, see General Requirements of Leap.
 
-   .. note::
+   .. note:: **This step is necessary even if using two HPOC clusters in the same datacenter**
 
-      **This step is necessary even if using two HPOC clusters in the same datacenter**
-
-   - To open the ports for communication to the *RecoverySite* cluster, run the following command on any CVM of the **PrimarySite** cluster.
+   To open the ports for communication to the *RecoverySite* cluster, run the following command on any CVM of the **PrimarySite** cluster.
 
    .. code-block:: bash
 
@@ -35,9 +33,10 @@ Leap Requirements
 
    - Replace *remote_virtual_ip* with the virtual IP address of the *RecoverySite* cluster.
 
-   - To open the ports for communication to the *PrimarySite* cluster, run the following command on any CVM of the **RecoverySite** cluster.
 
-   .. code-block:: language
+   To open the ports for communication to the *PrimarySite* cluster, run the following command on any CVM of the **RecoverySite** cluster.
+
+   .. code-block:: bash
 
       allssh 'modify_firewall -f -r primary_cvm_ip1/cidr,primary_cvm_ip2/cidr,primary_cvm_ip3/cidr,primary_cvm_ip4/cidr,primary_virtual_ip/cidr -p 2030,2036,2073,2090 -i eth0'
 
@@ -45,21 +44,15 @@ Leap Requirements
 
    - Replace *source_virtual_ip* with the virtual IP address of the *PrimarySite* cluster.
 
-::
+   .. note:: Example to run on PrimarySite (destination addresses are for RecoverySite)
 
-.. note::   Sample command
+   .. code-block:: bash
+      allssh 'modify_firewall -f -o open -r 10.38.212.29/25,10.38.212.30/25,10.38.212.31/25,10.38.212.32/25,10.38.212.37/25 -p 2030,2036,2073,2090 -i eth0'
 
-   Run on PrimarySite (destination address is RecoverySite)
+   .. note:: Example to run on RecoverySite (destination addresses are for PrimarySite)
 
-::
-
-   allssh 'modify_firewall -f -o open -r 10.38.212.29/25,10.38.212.30/25,10.38.212.31/25,10.38.212.32/25,10.38.212.37/25 -p 2030,2036,2073,2090 -i eth0'
-
-   Run on RecoverySite (destination address is PrimarySite)
-
-::
-
-   allssh 'modify_firewall -f -o open -r 10.42.54.29/25,10.42.54.30/25,10.42.54.31/25,10.42.54.32/25,10.42.54.37/25 -p 2030,2036,2073,2090 -i eth0'
+   .. code-block:: bash
+      allssh 'modify_firewall -f -o open -r 10.42.54.29/25,10.42.54.30/25,10.42.54.31/25,10.42.54.32/25,10.42.54.37/25 -p 2030,2036,2073,2090 -i eth0'
 
 
 Lab Requirements
