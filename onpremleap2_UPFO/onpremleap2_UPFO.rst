@@ -55,7 +55,7 @@ Creating A Recovery Plan
 
 #. Click **Create Recovery Plan**.
 
-#. Select **PC_10.38.173.40** as your **Recovery Location** and click **Proceed**.
+#. Select *RecoverySite PC* as your **Recovery Location** and click **Proceed**.
 
 #. Specify *Initials*\ **-FiestaRecovery** as your **Recovery Plan Name** and click **Next**.
 

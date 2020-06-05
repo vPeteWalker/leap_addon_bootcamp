@@ -23,7 +23,7 @@ Leap Requirements
 
 .. note::
 
-   This step is not necessary if using two HPOC clusters in the same datacenter **NEEDS TO BE CONFIRMED**
+   **This step is necessary even if using two HPOC clusters in the same datacenter**
 
 - To open the ports for communication on the primary cluster, run the following command on any CVM of the **recovery** cluster.
 
@@ -48,9 +48,9 @@ Leap Requirements
 Lab Requirements
 ++++++++++++++++
 
-#. Calm is enabled.
+#. Calm is enabled on the *PrimarySite* cluster.
 
-#. Leap is enabled.
+#. Leap is enabled on both clusters.
 
 #. If you are using the HPOC environment, reserve two clusters in the same datacenter to ensure synchronous replication latency recommendations are met.
 
@@ -292,27 +292,6 @@ Installing Nutanix Guest Tools
    - **Password** - nutanix/4u
 
    .. figure:: images/4c.png
-
-   ..   #. Click **Confirm and Enter Password > Skip and Mount** to mount the NGT .iso to your VMs.
-
-      .. note::
-
-         Nutanix Calm currently supports automatic installation of NGT for single VM blueprints, and plans to support multi-VM blueprints in the future.
-
-      .. #. SSH into your *Initials*\ **-WebServer-...** VM using the following credentials:
-      ..
-      ..    - **User Name** - centos
-      ..    - **Password** - nutanix/4u
-      ..
-      .. #. Within the VM SSH session, execute the following to install NGT:
-      ..
-      ..    .. code-block:: bash
-      ..
-      ..       sudo mount /dev/sr0 /mnt
-      ..       sudo /mnt/installer/linux/install_ngt.py
-      ..       sudo reboot
-      ..
-      .. #. Repeat **Steps 8-9** with your *Initials*\ **-MySQL-...** VM.
 
 #. Once both VMs have rebooted, validate both VMs now have empty CD-ROM drives and **NGT Status** displays **Latest** in Prism Central.
 
