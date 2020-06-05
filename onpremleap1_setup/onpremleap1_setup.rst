@@ -44,9 +44,13 @@ Leap Requirements
 
    - Replace *source_virtual_ip* with the virtual IP address of the *PrimarySite* cluster.
 
+
+
    .. note:: Example to run on PrimarySite (destination addresses are for RecoverySite)
       .. code-block:: bash
          allssh 'modify_firewall -f -o open -r 10.38.212.29/25,10.38.212.30/25,10.38.212.31/25,10.38.212.32/25,10.38.212.37/25 -p 2030,2036,2073,2090 -i eth0'
+
+
 
    .. note:: Example to run on RecoverySite (destination addresses are for PrimarySite)
       .. code-block:: bash
