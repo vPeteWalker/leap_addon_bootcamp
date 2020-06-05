@@ -77,7 +77,7 @@ Leap Requirements
    Example to run on *RecoverySite* (destination addresses are for *PrimarySite*)
 
    .. code-block:: bash
-   
+
       allssh 'modify_firewall -f -o open -r 10.42.54.29/25,10.42.54.30/25,10.42.54.31/25,10.42.54.32/25,10.42.54.37/25 -p 2030,2036,2073,2090 -i eth0'
 
 
@@ -172,8 +172,8 @@ Synchronous Replication Recommendation
 
    - For optimal performance, Nutanix recommends that the round trip latency (RTT) between clusters be less than 5 ms. Maintain adequate bandwidth to accommodate peak writes and have a redundant physical network between the clusters.
 
-Future Additions
-++++++++++++++++
+Lab Roadmap
++++++++++++
 
    - Implement staging to automate aspects of the setup process: Network creation, deployment of PC, enable Calm/Leap, deploy Calm blueprint for specified number of users, etc.
 
@@ -221,7 +221,7 @@ You can use Blueprints to model applications of various complexities; from simpl
 
 #. Open :fa:`bars` **Prism Central > Calm**, select **Blueprints** from the lefthand menu and click **Upload Blueprint**.
 
-   .. figure:: images/Calm/25.png
+   .. figure:: images/Calm/1.png
 
 #. Select **Fiesta-Multi-GITHUB.json**.
 
@@ -229,21 +229,21 @@ You can use Blueprints to model applications of various complexities; from simpl
 
 #. Select your *Initials*\ -FiestaProject project and click **Upload**.
 
-   .. figure:: images/Calm/26.png
+   .. figure:: images/Calm/2.png
 
 #. In order to launch the Blueprint you must first assign a network to the VM. Select the **NodeReact** Service, and in the **VM** Configuration menu on the right, select *Your Preferred Network* as the **NIC 1** network.
 
-   .. figure:: images/Calm/27.png
+   .. figure:: images/Calm/3.png
 
 #. Repeat the **NIC 1** assignment for the **MySQL** Service.
 
 #. Expand the *db_password* section, and within the *Value* entry, type *nutanix/4u* as the password.
 
-   .. figure:: images/Calm/db_password.png
+   .. figure:: images/Calm/4.png
 
 #. Click **Credentials** to define a private key used to authenticate to the CentOS VM that will be provisioned by the Blueprint.
 
-   .. figure:: images/Calm/27b.png
+   .. figure:: images/Calm/5.png
 
 #. Expand the **CENTOS** credential and paste in the following value as the **SSH Private Key**:
 
@@ -286,14 +286,14 @@ Deploy a multi-VM application via Calm
 
 #. Select the **FiestaApp** Blueprint and click **Actions > Launch**.
 
-   .. figure:: images/2.png
+   .. figure:: images/Calm/6.png
 
 #. Fill out the following fields and then click **Create** to begin provisioning your application:
 
    - **Name of the Application** - *Initials*\ -FiestaApp
    - **user_initials** - *Initials*
 
-.. figure:: images/Calm/BPinitials.png
+.. figure:: images/Calm/7.png
 
 #. Monitor the status of the application in the **Audit** tab and proceed once your application enters a **Running** state.
 
@@ -301,7 +301,7 @@ Deploy a multi-VM application via Calm
 
 #. Open http://*NodeReact-VM-IP-Address*:5001 in a new browser tab and validate you can access the Fiesta Inventory Management app.
 
-   .. figure:: images/5.png
+   .. figure:: images/Calm/8.png
 
 Installing Nutanix Guest Tools
 ++++++++++++++++++++++++++++++
@@ -318,22 +318,22 @@ Installing Nutanix Guest Tools
 
 #. Select both VMs and click **Actions > Install NGT**.
 
-   .. figure:: images/4.png
+   .. figure:: images/NGT/1.png
 
 #. Select **Restart as soon as the install is completed** and click **Confirm & Enter Password**.
 
-   .. figure:: images/4b.png
+   .. figure:: images/NGT/2.png
 
 #. Provide the following credentials and click **Done** to begin the NGT installation:
 
    - **User Name** - centos
    - **Password** - nutanix/4u
 
-   .. figure:: images/4c.png
+   .. figure:: images/NGT/3.png
 
 #. Once both VMs have rebooted, validate both VMs now have empty CD-ROM drives and **NGT Status** displays **Latest** in Prism Central.
 
-   .. figure:: images/6.png
+   .. figure:: images/NGT/4.png
 
 Creating a new Availability Zone
 ++++++++++++++++++++++++++++++++
@@ -348,6 +348,12 @@ Creating a new Availability Zone
 
 .. figure:: images/AZ/2.png
 
+
+
 .. figure:: images/AZ/3.png
 
-#. Observe that the **RecoverySite** cluster is now listed as *Physical*, and its *Connectivity Status* is listed as *Reachable*
+
+
+Observe that the **RecoverySite** cluster is now listed as *Physical*, and its *Connectivity Status* is listed as *Reachable*
+
+.. figure:: images/AZ/4.png
