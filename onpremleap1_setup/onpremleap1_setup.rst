@@ -21,34 +21,53 @@ Leap Requirements
 
 #. The clusters on the primary availability zone (site) and the recovery site communicate over the ports 2030, 2036, 2073, and 2090. Ensure that these ports have open access between both the primary cluster and recovery clusters (Prism Elements). For more information about the required ports, see General Requirements of Leap.
 
-.. note::
+   .. note::
 
-   **This step is necessary even if using two HPOC clusters in the same datacenter**
+      **This step is necessary even if using two HPOC clusters in the same datacenter**
 
-- To open the ports for communication on the primary cluster, run the following command on any CVM of the **recovery** cluster.
+   - To open the ports for communication to the *RecoverySite* cluster, run the following command on any CVM of the **PrimarySite** cluster.
+
+   .. code-block:: bash
+
+      allssh 'modify_firewall -f -r recovery_cvm_ip2/cidr,recovery_cvm_ip3/cidr,recovery_cvm_ip4/cidr,recovery_cvm_ip1/cidr,recovery_virtual_ip/cidr -p 2030,2036,2073,2090 -i eth0'
+
+   - Replace *recovery_cvm_ip#* with the IP address of the *RecoverySite* cluster CVMs.
+
+   - Replace *remote_virtual_ip* with the virtual IP address of the *RecoverySite* cluster.
+
+   - To open the ports for communication to the *PrimarySite* cluster, run the following command on any CVM of the **RecoverySite** cluster.
+
+   .. code-block:: language
+
+      allssh 'modify_firewall -f -r primary_cvm_ip1/cidr,primary_cvm_ip2/cidr,primary_cvm_ip3/cidr,primary_cvm_ip4/cidr,primary_virtual_ip/cidr -p 2030,2036,2073,2090 -i eth0'
+
+   - Replace *source_cvm_ip#* with the IP address of the *PrimarySite* cluster CVMs.
+
+   - Replace *source_virtual_ip* with the virtual IP address of the *PrimarySite* cluster.
 
 ::
 
-   nutanix@cvm$ allssh 'modify_firewall -f -r remote_cvm_ip,remote_virtual_ip -p 2030,2036,2073,2090 -i eth0'
+.. note::   Sample command
 
-   - Replace *remote_cvm_ip* with the IP address of the recovery cluster CVM.
-
-   - Replace *remote_virtual_ip* with the virtual IP address of the recovery cluster.
-
-- To open the ports for communication on the recovery cluster, run the following command on any CVM of the **primary** cluster.
+   Run on PrimarySite (destination address is RecoverySite)
 
 ::
 
-   nutanix@cvm$ allssh 'modify_firewall -f -r source_cvm_ip,source_virtual_ip -p 2030,2036,2073,2090 -i eth0'
+   allssh 'modify_firewall -f -o open -r 10.38.212.29/25,10.38.212.30/25,10.38.212.31/25,10.38.212.32/25,10.38.212.37/25 -p 2030,2036,2073,2090 -i eth0'
 
-   - Replace *source_cvm_ip* with the IP address of the primary cluster CVM.
+   Run on RecoverySite (destination address is PrimarySite)
 
-   - Replace *source_virtual_ip* with the virtual IP address of the primary cluster.
+::
+
+   allssh 'modify_firewall -f -o open -r 10.42.54.29/25,10.42.54.30/25,10.42.54.31/25,10.42.54.32/25,10.42.54.37/25 -p 2030,2036,2073,2090 -i eth0'
+
 
 Lab Requirements
 ++++++++++++++++
 
 #. Calm is enabled on the *PrimarySite* cluster.
+
+#. SSH client installed (ex. Putty for Windows)
 
 #. Leap is enabled on both clusters.
 
@@ -296,28 +315,6 @@ Installing Nutanix Guest Tools
 #. Once both VMs have rebooted, validate both VMs now have empty CD-ROM drives and **NGT Status** displays **Latest** in Prism Central.
 
    .. figure:: images/6.png
-
-Staging Guest Script
-++++++++++++++++++++
-
-New in 5.17, Leap allows you to execute scripts within a guest to update configuration files or perform other critical functions as part of the runbook. In this exercise you'll stage a script on your WebServer VM that will update its configuration file responsible for the MySQL VM connection, allowing the WebServer to connect to the MySQL database after failover to our **RecoverySite** network.
-
-#. SSH into your *Initials*\ **-WebServer-...** VM using the following credentials:
-
-   - **User Name** - centos
-   - **Password** - nutanix/4u
-
-#. Within the VM SSH session, execute the following:
-
-   .. code-block:: bash
-
-      cd /usr/local/sbin
-      sudo wget https://raw.githubusercontent.com/vPeteWalker/leap_addon_bootcamp/master/production_vm_recovery
-      sudo chmod +x /usr/local/sbin/production_vm_recovery
-
-   .. note::
-
-      Run ``sudo cat /usr/local/sbin/production_vm_recovery`` to view the contents of the failover script``.
 
 Creating a new Availability Zone
 ++++++++++++++++++++++++++++++++

@@ -8,6 +8,29 @@
 
    Planned failover functionality is scheduled to be released in AOS v5.17.1
 
+
+Staging Guest Script
+++++++++++++++++++++
+
+New in 5.17, Leap allows you to execute scripts within a guest to update configuration files or perform other critical functions as part of the runbook. In this exercise you'll stage a script on your WebServer VM that will update its configuration file responsible for the MySQL VM connection, allowing the WebServer to connect to the MySQL database after failover to our **RecoverySite** network.
+
+#. SSH into your *Initials*\ **-WebServer-...** VM using the following credentials:
+
+   - **User Name** - centos
+   - **Password** - nutanix/4u
+
+#. Within the VM SSH session, execute the following:
+
+   .. code-block:: bash
+
+      cd /usr/local/sbin
+      sudo wget https://github.com/vPeteWalker/leap_addon_bootcamp/raw/master/production_vm_recovery
+      sudo chmod +x /usr/local/sbin/production_vm_recovery
+
+   .. note::
+
+      Run ``sudo cat /usr/local/sbin/production_vm_recovery`` to view the contents of the failover script``.
+
 Creating A Protection Policy
 ++++++++++++++++++++++++++++
 

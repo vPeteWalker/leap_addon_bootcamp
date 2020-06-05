@@ -4,6 +4,28 @@
 Unplanned Failover with Leap
 ----------------------------
 
+Staging Guest Script
+++++++++++++++++++++
+
+New in 5.17, Leap allows you to execute scripts within a guest to update configuration files or perform other critical functions as part of the runbook. In this exercise you'll stage a script on your WebServer VM that will update its configuration file responsible for the MySQL VM connection, allowing the WebServer to connect to the MySQL database after failover to our **RecoverySite** network.
+
+#. SSH into your *Initials*\ **-WebServer-...** VM using the following credentials:
+
+   - **User Name** - centos
+   - **Password** - nutanix/4u
+
+#. Within the VM SSH session, execute the following:
+
+   .. code-block:: bash
+
+      cd /usr/local/sbin
+      sudo wget https://github.com/vPeteWalker/leap_addon_bootcamp/raw/master/production_vm_recovery
+      sudo chmod +x /usr/local/sbin/production_vm_recovery
+
+   .. note::
+
+      Run ``sudo cat /usr/local/sbin/production_vm_recovery`` to view the contents of the failover script``.
+
 Creating A Protection Policy
 ++++++++++++++++++++++++++++
 
@@ -89,7 +111,7 @@ Creating A Recovery Plan
 
    In this step you will map VM networks from your primary site to your recovery site.
 
-#. Select **VLAN1943** for **Local AZ Production** and **Local AZ Test Failback** Virtual Networks. Select **VLAN1733** for **PC_10.38.173.40 Production** and **PC_10.38.173.40 Test Failback** Virtual Networks.
+#. Select the networks where your VMs reside for **Local AZ (Primary) - Production** and **Local AZ (Primary) - Test Failback**. Repeat for  **PC_*RecoverySite PC IP* (Recovery) - Production** and **PC_*RecoverySite PC IP* (Recovery) - Test Failback**.
 
    .. figure:: images/15.png
 
@@ -106,10 +128,7 @@ Before performing our failover, we'll make a quick update to our application.
 
    .. figure:: images/16.png
 
-#. Log in to Prism Central for your **RecoverySite** (NOT YOUR **PrimarySite** CLUSTER) at https://10.38.173.40:9440/ using the following credentials:
-
-   - **Username** - admin
-   - **Password** - emeaX2020!
+#. Log in to Prism Central for your **RecoverySite**.
 
 #. Open :fa:`bars` **> Policies > Recovery Plans**.
 
@@ -121,7 +140,7 @@ Before performing our failover, we'll make a quick update to our application.
 
    .. figure:: images/18.png
 
-#. Ignore any warnings related to Calm categories not found in the Recovery AZ and click **Execute Anyway**.
+#. Ignore any warnings related to Calm categories not found, or licensing violations in the Recovery AZ and click **Execute Anyway**.
 
 #. Click the **Name** of your Recovery Plan to monitor status of plan execution. Select **Tasks > Failover** for full details.
 

@@ -22,4 +22,6 @@
 
   onpremleap3_PFO/onpremleap3_PFO
 
-.. _onpremleap1_setup:
+:ref:`_onpremleap1_setup`
+
+:ref:`Get Started <_onpremleap1_setup>`
