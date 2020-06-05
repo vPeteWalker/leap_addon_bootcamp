@@ -8,12 +8,12 @@
 
   onpremleap2_UPFO/onpremleap2_UPFO
 
-  :maxdepth: 2
-  :caption: [FUTURE] Planned Failover (PFO)
-  :name: onpremleap3_PFO/onpremleap3_PFO
-  :hidden:
-
-  onpremleap3_PFO/onpremleap3_PFO
+..:maxdepth: 2
+..:caption: [FUTURE] Planned Failover (PFO)
+..:name: onpremleap3_PFO/onpremleap3_PFO
+..:hidden:
+..
+..onpremleap3_PFO/onpremleap3_PFO
 
 .. _onpremleap1_setup:
 

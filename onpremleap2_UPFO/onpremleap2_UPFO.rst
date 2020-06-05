@@ -7,7 +7,7 @@ Unplanned Failover with Leap
 Staging Guest Script
 ++++++++++++++++++++
 
-New in 5.17, Leap allows you to execute scripts within a guest to update configuration files or perform other critical functions as part of the runbook. In this exercise you'll stage a script on your WebServer VM that will update its configuration file responsible for the MySQL VM connection, allowing the WebServer to connect to the MySQL database after failover to our **RecoverySite** network.
+New in 5.17, Leap allows you to execute scripts within a guest to update configuration files or perform other critical functions as part of the runbook. In this exercise, you'll stage a script on your WebServer VM that will update its configuration file responsible for the MySQL VM connection, allowing the WebServer to connect to the MySQL database after failover to our **RecoverySite** network.
 
 #. SSH into your *Initials*\ **-WebServer-...** VM using the following credentials:
 
@@ -43,7 +43,7 @@ Creating A Protection Policy
    - Under **Failure Handling**, select **Automatic**
    - **Timeout After** - 10 Seconds
 
-   .. figure:: images/7.png
+   .. figure:: images/Protection/1.png
 
    .. note::
 
@@ -60,15 +60,15 @@ Assigning A Protection Policy
 
 #. Select your *Initials*\ **-FiestaProtection** policy and click **Protect**.
 
-   .. figure:: images/9.png
+   .. figure:: images/Protection/2.png
 
 #. In the **VM List**, click **Focus** and select **Data Protection** from the drop down menu.
 
-   .. figure:: images/10.png
+   .. figure:: images/Protection/3.png
 
 #. Observe the **Protection Status** of each of your VMs move to **Synced**.
 
-   .. figure:: images/11.png
+   .. figure:: images/Protection/411.png
 
 Creating A Recovery Plan
 ++++++++++++++++++++++++
@@ -85,17 +85,17 @@ Creating A Recovery Plan
 
 #. Select your *Initials*\ **-MySQL-...** VM and click **Add**.
 
-   .. figure:: images/12.png
+   .. figure:: images/Recovery/1.png
 
 #. Click **+ Add New Stage**. Under **Stage 2**, click **+ Add Entities**.
 
-   .. figure:: images/13.png
+   .. figure:: images/Recovery/2.png
 
 #. Select your *Initials*\ **-WebServer-...** VM and click **Add**.
 
 #. Select your *Initials*\ **-WebServer-...** VM and click **Manage Scripts > Enable**. This will run the **production_vm_recovery** script within the guest VM you staged in a previous exercise.
 
-   .. figure:: images/21.png
+   .. figure:: images/Recovery/3.png
 
    .. note::
 
@@ -103,7 +103,7 @@ Creating A Recovery Plan
 
 #. Click **+ Add Delay** between your two stages.
 
-   .. figure:: images/14.png
+   .. figure:: images/Recovery/4.png
 
 #. Specify **60** seconds and click **Add**.
 
@@ -113,7 +113,7 @@ Creating A Recovery Plan
 
 #. Select the networks where your VMs reside for **Local AZ (Primary) - Production** and **Local AZ (Primary) - Test Failback**. Repeat for  **PC_*RecoverySite PC IP* (Recovery) - Production** and **PC_*RecoverySite PC IP* (Recovery) - Test Failback**.
 
-   .. figure:: images/15.png
+   .. figure:: images/Recovery/5.png
 
 #. Click **Done**.
 
@@ -122,11 +122,11 @@ Performing An Unplanned Failover
 
 Before performing our failover, we'll make a quick update to our application.
 
-#. Open http://*Initials-WebServer-VM-IP-Address*:5001 in another browser tab.
+#. Open http://`Initials-WebServer-VM-IP-Address`:5001 in another browser tab.
 
 #. Under **Stores**, click **Add New Store** and fill out the required fields. Validate your new store appears in the UI.
 
-   .. figure:: images/16.png
+   .. figure:: images/Failover/1.png
 
 #. Log in to Prism Central for your **RecoverySite**.
 
@@ -134,20 +134,24 @@ Before performing our failover, we'll make a quick update to our application.
 
 #. Select your *Initials*\ **-FiestaRecovery** plan and click **Actions > Failover**.
 
-   .. figure:: images/17.png
+   .. figure:: images/Failover/2.png
 
 #. To simulate a true DR event, under **Failover Type**, select **Unplanned Failover** and click **Failover**.
 
-   .. figure:: images/18.png
+   .. figure:: images/Failover/3.png
 
-#. Ignore any warnings related to Calm categories not found, or licensing violations in the Recovery AZ and click **Execute Anyway**.
+#. Ignore any warnings in the Recovery AZ and click **Execute Anyway**.
 
 #. Click the **Name** of your Recovery Plan to monitor status of plan execution. Select **Tasks > Failover** for full details.
 
-   .. figure:: images/20.png
+   .. figure:: images/Failover/4.png
+
+.. note::
+
+   If you had validation warnings before initiating failover, it is normal for the *Validating Recovery Plan* step to show a Status of *Failed*.
 
 #. Once the Recovery Plan reaches 100%, open :fa:`bars` **> Virtual Infrastructure > VMs** and note the *new* IP Address of your *Initials*\ **-WebServer-...**.
 
-#. Open http://<*Initials-WebServer-VM-NEW-IP-Address*:5001> in another browser tab and verify the change you'd made to your application is present.
+#. Open http://`Initials-WebServer-VM-NEW-IP-Address`:5001 in another browser tab and verify the change you'd made to your application is present.
 
 Congratulations! You've completed your first DR failover with Nutaix AHV, leveraging native Leap runbook capabilities and synchronous replication.
