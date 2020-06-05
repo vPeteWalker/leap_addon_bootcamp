@@ -329,5 +329,3 @@ Creating a new Availability Zone
 .. figure:: images/AZ/3.png
 
 #. Observe that the **RecoverySite** cluster is now listed as *Physical*, and its *Connectivity Status* is listed as *Reachable*
-
-**MOVE ONTO NEXT PART - ADD LINK HERE**
