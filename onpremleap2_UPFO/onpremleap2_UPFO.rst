@@ -99,7 +99,13 @@ Creating A Recovery Plan
 
    .. note::
 
-      You can mouse over **Script Path** to see where Leap expects guest scripts for Windows and Linux guests.
+      Leap guest script locations
+         - **Windows** (Relative to Nutanix directory in Program Files)
+            Production: scripts/production/vm_recovery.bat
+            Test: scripts/test/vm_recovery.bat
+         - **Linux**
+         Production: /usr/local/sbin/production_vm_recovery
+         Test: /usr/local/sbin/test_vm_recovery for Windows and Linux guests.
 
 #. Click **+ Add Delay** between your two stages.
 
