@@ -124,15 +124,15 @@ Leap Limitations
 
 (As of June 2nd, 2020)
 
-- Planned for 5.17.1
+|
+
+- **Planned for 5.17.1**
    - Test Failover
    - Planned Failover
 
 |
 
-- Not supported
-
-|
+- **Not supported**
 
    - Volume Groups (Planned 5.21)
    - Files (Planned 5.19+)
@@ -215,7 +215,7 @@ Calm configuration
 
    .. figure:: images/Calm/23.png
 
-|
+
 
 #. Fill out the following fields:
 
@@ -252,7 +252,7 @@ You can use Blueprints to model applications of various complexities; from simpl
 
    .. figure:: images/Calm/1.png
 
-|
+
 
 #. Select **Fiesta-Multi-GITHUB.json**.
 
@@ -262,13 +262,13 @@ You can use Blueprints to model applications of various complexities; from simpl
 
    .. figure:: images/Calm/2.png
 
-|
+
 
 #. In order to launch the Blueprint you must first assign a network to the VM. Select the **NodeReact** Service, and in the **VM** Configuration menu on the right, select *Your Preferred Network* as the **NIC 1** network.
 
    .. figure:: images/Calm/3.png
 
-|
+
 
 #. Repeat the **NIC 1** assignment for the **MySQL** Service.
 
@@ -276,13 +276,13 @@ You can use Blueprints to model applications of various complexities; from simpl
 
    .. figure:: images/Calm/4.png
 
-|
+
 
 #. Click **Credentials** to define a private key used to authenticate to the CentOS VM that will be provisioned by the Blueprint.
 
    .. figure:: images/Calm/5.png
 
-|
+
 
 #. Expand the **CENTOS** credential and paste in the following value as the **SSH Private Key**:
 
@@ -401,22 +401,19 @@ Installing Nutanix Guest Tools
 
 #. Open :fa:`bars` **> Administration > Availability Zones** and observe that a Local AZ has already been created by default. Click **Connect to Availability Zone**
 
-.. figure:: images/AZ/1.png
-
+   .. figure:: images/AZ/1.png
 
 
 #. In the *Availability Zone Type* dropdown, select **Physical Location**. Enter the IP, username, and password for the **RecoverySite** PC, and click **Connect**.
 
-.. figure:: images/AZ/2.png
+   .. figure:: images/AZ/2.png
 
 
-
-.. figure:: images/AZ/3.png
-
+   .. figure:: images/AZ/3.png
 
 
-Observe that the **RecoverySite** cluster is now listed as *Physical*, and its *Connectivity Status* is listed as *Reachable*
+#. Observe that the **RecoverySite** cluster is now listed as *Physical*, and its *Connectivity Status* is listed as *Reachable*
 
-.. figure:: images/AZ/4.png
+   .. figure:: images/AZ/4.png
 
 |
