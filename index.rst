@@ -24,7 +24,7 @@ Setup and Requirements
 Nutanix AOS 5.17 offer significant enhancements to Leap for on-premises failover operations, including support for execution of guest scripts and synchronous replication with AHV.
 
 **In this lab you deploy a multi-tier application, protect your VMs, build a Recovery Plan for runbook automation, and perform a failover operation to another Nutanix cluster.**
-
+|
 Leap Requirements
 +++++++++++++++++
 
@@ -50,7 +50,7 @@ Leap Requirements
 
    - Replace *remote_virtual_ip* with the virtual IP address of the *RecoverySite* cluster.
 
-
+|
 
    To open the ports for communication to the *PrimarySite* cluster, run the following command from any CVM on the **RecoverySite** cluster.
 
@@ -62,9 +62,7 @@ Leap Requirements
 
    - Replace *source_virtual_ip* with the virtual IP address of the *PrimarySite* cluster.
 
-
-
-
+|
 
    Example to run on *PrimarySite* (destination addresses are for *RecoverySite*)
 
@@ -72,15 +70,14 @@ Leap Requirements
 
       allssh 'modify_firewall -f -o open -r 10.38.212.29/25,10.38.212.30/25,10.38.212.31/25,10.38.212.32/25,10.38.212.37/25 -p 2030,2036,2073,2090 -i eth0'
 
-
+|
 
    Example to run on *RecoverySite* (destination addresses are for *PrimarySite*)
 
    .. code-block:: bash
 
       allssh 'modify_firewall -f -o open -r 10.42.54.29/25,10.42.54.30/25,10.42.54.31/25,10.42.54.32/25,10.42.54.37/25 -p 2030,2036,2073,2090 -i eth0'
-
-
+|
 Lab Requirements
 ++++++++++++++++
 
@@ -101,6 +98,7 @@ Lab Requirements
    When utilizing the HPOC, both Primary and Secondary network information will be provided with your reservation.
 
 .. note::
+   .. class:: center
 
    Recommended IPAM pools when using HPOC
 
@@ -113,7 +111,22 @@ Lab Requirements
       - Range = .132 - .253
       - IPAM DHCP = .254
       - (122 available IPs)
+|
+.. note::
+.. class:: center
 
+   Recommended IPAM pools when using HPOC
+
+   - Primary
+      - Range = .50 - .125
+      - IPAM DHCP = .126
+      - (76 available IPs)
+
+   - Secondary
+      - Range = .132 - .253
+      - IPAM DHCP = .254
+      - (122 available IPs)
+|
 Leap Limitations
 ++++++++++++++++
 
@@ -121,34 +134,34 @@ Leap Limitations
 
 #. Planned for 5.17.1
    - Test Failover Planned Failover
-
+|
 #. Not supported
-
+|
    - Volume Groups (Planned 5.21)
-
    - Files (Planned 5.19+)
-
    - Single PC (Planned 5.19)
-
    - Automatic resumption from outage when Automatic Failure Handling is set
-
    - 1-node and 2-node configurations
-
    - Multi-site Sync Rep Multi-site Sync + NearSync/Async
-
+|
 AHV Sync-Rep FAQ [**INTERNAL LINK**]
 ++++++++++++++++++++++++++++++++++++
 
+|
 https://docs.google.com/document/d/1jqJ8bENTS8LW0oAOezXlucgB9Zfylj6n5HupeJUOE5s/edit?ts=5e7b7d65
 
+|
 Xi Leap Admin Guide
 +++++++++++++++++++
 
+|
 https://portal.nutanix.com/page/documents/details/?targetId=Xi-Leap-Admin-Guide%3AXi-Leap-Admin-Guide
 
+|
 Synchronous Replication Limitations
 +++++++++++++++++++++++++++++++++++
 
+|
 .. note::
 
    These limitations are in addition to the general limitations of Leap.
@@ -170,8 +183,10 @@ Synchronous Replication Limitations
 Synchronous Replication Recommendation
 ++++++++++++++++++++++++++++++++++++++
 
+|
    - For optimal performance, Nutanix recommends that the round trip latency (RTT) between clusters be less than 5 ms. Maintain adequate bandwidth to accommodate peak writes and have a redundant physical network between the clusters.
 
+|
 Lab Roadmap
 +++++++++++
 
@@ -181,6 +196,7 @@ Lab Roadmap
 
    - Add Windows-based activity
 
+|
 Calm configuration
 ++++++++++++++++++
 
@@ -190,6 +206,7 @@ Calm configuration
 
    .. figure:: images/Calm/23.png
 
+|
 #. Fill out the following fields:
 
    - **Project Name** - *Initials*\ -FiestaProject
@@ -208,6 +225,7 @@ Calm configuration
 
 This will redirect you to the Envrionments page, but there is nothing needed to configure here. You may now move on to the next step.
 
+|
 Staging Blueprints
 ..................
 
@@ -223,6 +241,7 @@ You can use Blueprints to model applications of various complexities; from simpl
 
    .. figure:: images/Calm/1.png
 
+|
 #. Select **Fiesta-Multi-GITHUB.json**.
 
 #. Update the **Blueprint Name** to include your initials. Even across different projects, Calm Blueprint names must be unique.
@@ -231,20 +250,24 @@ You can use Blueprints to model applications of various complexities; from simpl
 
    .. figure:: images/Calm/2.png
 
+|
 #. In order to launch the Blueprint you must first assign a network to the VM. Select the **NodeReact** Service, and in the **VM** Configuration menu on the right, select *Your Preferred Network* as the **NIC 1** network.
 
    .. figure:: images/Calm/3.png
 
+|
 #. Repeat the **NIC 1** assignment for the **MySQL** Service.
 
 #. Expand the *db_password* section, and within the *Value* entry, type *nutanix/4u* as the password.
 
    .. figure:: images/Calm/4.png
 
+|
 #. Click **Credentials** to define a private key used to authenticate to the CentOS VM that will be provisioned by the Blueprint.
 
    .. figure:: images/Calm/5.png
 
+|
 #. Expand the **CENTOS** credential and paste in the following value as the **SSH Private Key**:
 
    ::
@@ -288,6 +311,7 @@ Deploy a multi-VM application via Calm
 
    .. figure:: images/Calm/6.png
 
+|
 #. Fill out the following fields and then click **Create** to begin provisioning your application:
 
    - **Name of the Application** - *Initials*\ -FiestaApp
@@ -295,6 +319,7 @@ Deploy a multi-VM application via Calm
 
 .. figure:: images/Calm/7.png
 
+|
 #. Monitor the status of the application in the **Audit** tab and proceed once your application enters a **Running** state.
 
 #. On the **Services** tab, select the **NodeReact** service and note the IP Address. This is the web server hosting the front end of your application.
@@ -303,6 +328,7 @@ Deploy a multi-VM application via Calm
 
    .. figure:: images/Calm/8.png
 
+|
 Installing Nutanix Guest Tools
 ++++++++++++++++++++++++++++++
 
@@ -320,10 +346,12 @@ Installing Nutanix Guest Tools
 
    .. figure:: images/NGT/1.png
 
+|
 #. Select **Restart as soon as the install is completed** and click **Confirm & Enter Password**.
 
    .. figure:: images/NGT/2.png
 
+|
 #. Provide the following credentials and click **Done** to begin the NGT installation:
 
    - **User Name** - centos
@@ -331,10 +359,12 @@ Installing Nutanix Guest Tools
 
    .. figure:: images/NGT/3.png
 
+|
 #. Once both VMs have rebooted, validate both VMs now have empty CD-ROM drives and **NGT Status** displays **Latest** in Prism Central.
 
    .. figure:: images/NGT/4.png
 
+|
 Creating a new Availability Zone
 ++++++++++++++++++++++++++++++++
 
@@ -344,16 +374,17 @@ Creating a new Availability Zone
 
 .. figure:: images/AZ/1.png
 
+|
 #. In the *Availability Zone Type* dropdown, select **Physical Location**. Enter the IP, username, and password for the **RecoverySite** PC, and click **Connect**.
 
 .. figure:: images/AZ/2.png
 
-
-
+|
 .. figure:: images/AZ/3.png
 
-
-
+|
 Observe that the **RecoverySite** cluster is now listed as *Physical*, and its *Connectivity Status* is listed as *Reachable*
 
 .. figure:: images/AZ/4.png
+
+|
