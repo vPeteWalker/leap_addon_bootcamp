@@ -37,7 +37,7 @@ Creating A Protection Policy
 
    - **Name** - *Initials*\ -FiestaProtection
    - **Primary Cluster(s)** - PrimarySite
-   - **Recovery Location** - PC_*RecoverySite IP*
+   - **Recovery Location** - PC_ *RecoverySite IP*
    - **Target Cluster** - RecoverySite
    - Under **Policy Type**, select **Synchronous**
    - Under **Failure Handling**, select **Automatic**
@@ -101,10 +101,15 @@ Creating A Recovery Plan
 
       Leap guest script locations
          - **Windows** (Relative to Nutanix directory in Program Files)
+
             Production: scripts/production/vm_recovery.bat
+
             Test: scripts/test/vm_recovery.bat
+
          - **Linux**
+
          Production: /usr/local/sbin/production_vm_recovery
+
          Test: /usr/local/sbin/test_vm_recovery for Windows and Linux guests.
 
 #. Click **+ Add Delay** between your two stages.
@@ -117,7 +122,7 @@ Creating A Recovery Plan
 
    In this step you will map VM networks from your primary site to your recovery site.
 
-#. Select the networks where your VMs reside for **Local AZ (Primary) - Production** and **Local AZ (Primary) - Test Failback**. Repeat for  **PC_*RecoverySite PC IP* (Recovery) - Production** and **PC_*RecoverySite PC IP* (Recovery) - Test Failback**.
+#. Select the networks where your VMs reside for **Local AZ (Primary) - Production** and **Local AZ (Primary) - Test Failback**. Repeat for  **PC_ *RecoverySite PC IP* (Recovery) - Production** and **PC_ *RecoverySite PC IP* (Recovery) - Test Failback**.
 
    .. figure:: images/Recovery/5.png
 
