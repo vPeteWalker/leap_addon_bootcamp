@@ -365,13 +365,13 @@ Installing Nutanix Guest Tools
 
    .. figure:: images/NGT/1.png
 
-|
+
 
 #. Select **Restart as soon as the install is completed** and click **Confirm & Enter Password**.
 
    .. figure:: images/NGT/2.png
 
-|
+
 
 #. Provide the following credentials and click **Done** to begin the NGT installation:
 
@@ -380,7 +380,7 @@ Installing Nutanix Guest Tools
 
    .. figure:: images/NGT/3.png
 
-|
+
 
 #. Once both VMs have rebooted, validate both VMs now have empty CD-ROM drives and **NGT Status** displays **Latest** in Prism Central.
 
@@ -388,8 +388,8 @@ Installing Nutanix Guest Tools
 
 |
 
-Creating a new Availability Zone
-++++++++++++++++++++++++++++++++
+[**Instructor led**] Creating a new Availability Zone
++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. note::
 
@@ -403,17 +403,17 @@ Creating a new Availability Zone
 
 .. figure:: images/AZ/1.png
 
-|
+
 
 #. In the *Availability Zone Type* dropdown, select **Physical Location**. Enter the IP, username, and password for the **RecoverySite** PC, and click **Connect**.
 
 .. figure:: images/AZ/2.png
 
-|
+
 
 .. figure:: images/AZ/3.png
 
-|
+
 
 Observe that the **RecoverySite** cluster is now listed as *Physical*, and its *Connectivity Status* is listed as *Reachable*
 
