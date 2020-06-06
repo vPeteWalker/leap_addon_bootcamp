@@ -388,7 +388,7 @@ Installing Nutanix Guest Tools
 
 |
 
-[**Instructor led**] Creating a new Availability Zone
+[INSTRUCTOR LED] Creating a new Availability Zone
 +++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. note::
