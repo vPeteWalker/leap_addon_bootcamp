@@ -368,6 +368,11 @@ Installing Nutanix Guest Tools
 Creating a new Availability Zone
 ++++++++++++++++++++++++++++++++
 
+.. note::
+
+   **Instructor will demonstrate the following steps**
+
+|
 #. Log in to Prism Central for your **PrimarySite** cluster.
 
 #. Open :fa:`bars` **> Administration > Availability Zones** and observe that a Local AZ has already been created by default. Click **Connect to Availability Zone**
