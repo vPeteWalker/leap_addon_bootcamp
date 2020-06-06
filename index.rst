@@ -52,6 +52,8 @@ Leap Requirements
 
          allssh 'modify_firewall -f -r recovery_cvm_ip2/cidr,recovery_cvm_ip3/cidr,recovery_cvm_ip4/cidr,recovery_cvm_ip1/cidr,recovery_virtual_ip/cidr -p 2030,2036,2073,2090 -i eth0'
 
+|
+
          - Replace *recovery_cvm_ip#* with the IP address of the *RecoverySite* cluster CVMs.
 
          - Replace *remote_virtual_ip* with the virtual IP address of the *RecoverySite* cluster.
@@ -63,6 +65,8 @@ Leap Requirements
       .. code-block:: bash
 
          allssh 'modify_firewall -f -r primary_cvm_ip1/cidr,primary_cvm_ip2/cidr,primary_cvm_ip3/cidr,primary_cvm_ip4/cidr,primary_virtual_ip/cidr -p 2030,2036,2073,2090 -i eth0'
+
+|
 
          - Replace *source_cvm_ip#* with the IP address of the *PrimarySite* cluster CVMs.
 
