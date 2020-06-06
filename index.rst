@@ -357,14 +357,6 @@ Installing Nutanix Guest Tools
 
 #. Open :fa:`bars` **> Virtual Infrastructure > VMs**.
 
-#. Select your *Initials*\ **-WebServer-...** VM and click **Actions > Update**.
-
-#. Under **Disks**, click :fa:`eject` beside **CD-ROM** to unmount the Cloud-Init disk mounted during the Calm deployment.
-
-#. Click **Save**.
-
-#. Repeat **Steps 2-4** to eject the **CD-ROM** on your *Initials*\ **-MySQL-...** VM.
-
 #. Select both VMs and click **Actions > Install NGT**.
 
    .. figure:: images/NGT/1.png
