@@ -238,7 +238,7 @@ This will redirect you to the Envrionments page, but there is nothing needed to 
 |
 
 Staging Blueprints
-..................
+++++++++++++++++++
 
 A Blueprint is the framework for every application that you model by using Nutanix Calm. Blueprints are templates that describe all the steps that are required to provision, configure, and execute tasks on the services and applications that are created. A Blueprint also defines the lifecycle of an application and its underlying infrastructure, starting from the creation of the application to the actions that are carried out on a application (updating software, scaling out, etc.) until the termination of the application.
 
@@ -319,7 +319,7 @@ You can use Blueprints to model applications of various complexities; from simpl
 #. Click **Save** and click **Back** once the Blueprint has completed saving.
 
 Deploy a multi-VM application via Calm
-......................................
+++++++++++++++++++++++++++++++++++++++
 
 #. Open :fa:`bars` **> Services > Calm** and select **Blueprints** from the sidebar.
 
