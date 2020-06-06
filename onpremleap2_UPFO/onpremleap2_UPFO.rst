@@ -68,7 +68,7 @@ Assigning A Protection Policy
 
 #. Observe the **Protection Status** of each of your VMs move to **Synced**.
 
-   .. figure:: images/Protection/411.png
+   .. figure:: images/Protection/4.png
 
 Creating A Recovery Plan
 ++++++++++++++++++++++++
