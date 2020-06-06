@@ -120,7 +120,7 @@ Creating A Recovery Plan
 
    In this step you will map VM networks from your primary site to your recovery site.
 
-#. Select the networks where your VMs reside for **Local AZ (Primary) - Production** and **Local AZ (Primary) - Test Failback**. Repeat for **PC_ *RecoverySite PC IP* (Recovery) - Production** and **PC_ *RecoverySite PC IP* (Recovery) - Test Failback.**
+#. Select the networks where your VMs reside for **Local AZ (Primary) - Production** and **Local AZ (Primary) - Test Failback**. Repeat for **PC_ *RecoverySite PC IP* (Recovery) - Production** and ** PC_ *RecoverySite PC IP* (Recovery) - Test Failback.**
 
    .. figure:: images/Recovery/5.png
 
@@ -131,7 +131,7 @@ Performing An Unplanned Failover
 
 Before performing our failover, we'll make a quick update to our application.
 
-#. Open `http://` `Initials-WebServer-VM-IP-Address` :5001 in another browser tab.
+#. Open http:// *Initials-WebServer-VM-IP-Address* :5001 in another browser tab.
 
 #. Under **Stores**, click **Add New Store** and fill out the required fields. Validate your new store appears in the UI.
 
