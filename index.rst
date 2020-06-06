@@ -327,16 +327,16 @@ Deploy a multi-VM application via Calm
 
    .. figure:: images/Calm/6.png
 
-|
+
 
 #. Fill out the following fields and then click **Create** to begin provisioning your application:
 
    - **Name of the Application** - *Initials*\ -FiestaApp
    - **user_initials** - *Initials*
 
-.. figure:: images/Calm/7.png
+   .. figure:: images/Calm/7.png
 
-|
+
 
 #. Monitor the status of the application in the **Audit** tab and proceed once your application enters a **Running** state.
 
