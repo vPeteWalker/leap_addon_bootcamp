@@ -222,4 +222,4 @@ Before performing our failback, let's make another update to our application.
 
 #. Open `http://` `Initials-WebServer-VM-NEW-IP-Address` :5001 in another browser tab and verify the change you'd made to your application is present.
 
-Congratulations! You've completed your first DR failback with Nutaix AHV, leveraging native Leap runbook capabilities and synchronous replication.
+Congratulations! You've completed your first DR failback with Nutanix AHV, leveraging native Leap runbook capabilities and synchronous replication.
