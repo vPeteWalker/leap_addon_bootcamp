@@ -387,6 +387,17 @@ Installing Nutanix Guest Tools
 [INSTRUCTOR LED] Creating a new Availability Zone
 +++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+What is an Availability Zone?
+
+ - An Availability Zone is a location to which you can replicate the data that you want to protect. It is represented by a Prism Central instance to which a Nutanix cluster is registered. To ensure availability, Availability Zones must be physically isolated from each other.
+
+ - An Availability Zone can be in either of the following locations:
+
+   - Xi Cloud Services. If you choose to replicate data to Xi Cloud Services, the on-premises Prism Central instance is paired with a Xi Cloud Services account, and data is replicated to Xi Cloud Services.
+   - Physical Datacenter. If you choose to back up data to a physical datacenter, you must provide details of a Prism Central instance running in a datacenter that you own, and that is physically isolated from the primary Availability Zone. **We will be simulating using two physical datacenters in this lab**
+
+
+
 .. note::
 
    **Instructor will demonstrate the following steps**

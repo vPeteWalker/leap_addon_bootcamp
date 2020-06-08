@@ -29,6 +29,8 @@ New in 5.17, Leap allows you to execute scripts within a guest to update configu
 Creating A Protection Policy
 ++++++++++++++++++++++++++++
 
+A protection policy is where you specify your Recovery Point Objectives (RPO) and retention policies.
+
 #. In Prism Central, open :fa:`bars` **> Policies > Protection Policies**.
 
 #. Click **Create Protection Policy**.
@@ -118,7 +120,7 @@ Creating A Recovery Plan
 
 #. Click **Next**.
 
-   In this step you will map VM networks from your primary site to your recovery site.
+   In this step you will configure network settings which enable you to map networks in the local availability zone (*PrimarySite*) to networks at the recovery location (*RecoverySite*).
 
 #. Select the networks where your VMs reside for **Local AZ (Primary) - Production** and **Local AZ (Primary) - Test Failback**. Repeat for **PC_ *RecoverySite PC IP* (Recovery) - Production** and ** PC_ *RecoverySite PC IP* (Recovery) - Test Failback.**
 
@@ -129,7 +131,21 @@ Creating A Recovery Plan
 Performing An Unplanned Failover
 ++++++++++++++++++++++++++++++++
 
-Before performing our failover, we'll make a quick update to our application.
+There are 3 types of failovers: Test, Planned and Unplanned.
+
+- Test failovers are for testing a recovery plan. VMs are started in the test network as specified in the recovery plan. VMs at the primary location are not affected.
+
+- Planned failovers (PFO) are when disruption of services is predicted at the primary site. The recovery plan will first create a snapshot of each VM, replicates, then starts them at the recovery location. They no longer run at the primary site after a planned failover has occurred. Replication then begins in the reverse direction (from *RecoverySite* to *PrimarySite*)
+
+- Unplanned failovers (UPFO) occur when a disaster has already occurred at the primary location. VMs are recovered from the most recent snapshot, and are started at the recovery site.
+
+**In this exercise, you will perform an Unplanned Failover (UPFO).**
+
+Failovers are initiated from the remote site, which can either be another on-prem Prism Central located at your DR site, or Xi Cloud Servies.
+
+In this exercise, we will be connecting to an on-prem Prism Central at the *RecoverySite*, which we've already paired with the *PrimarySite* on-prem cluster.
+
+Before performing our failover, let's make a quick update to our application.
 
 #. Open http:// *Initials-WebServer-VM-IP-Address* :5001 in another browser tab.
 
@@ -145,11 +161,11 @@ Before performing our failover, we'll make a quick update to our application.
 
    .. figure:: images/Failover/2.png
 
-#. To simulate a true DR event, under **Failover Type**, select **Unplanned Failover** and click **Failover**.
+#. Under **Failover Type**, select **Unplanned Failover** and click **Failover**.
 
    .. figure:: images/Failover/3.png
 
-#. Ignore any warnings in the Recovery AZ and click **Execute Anyway**.
+#. Ignore any warnings in the Recovery AZ (*RecoverySite*) and click **Execute Anyway**.
 
 #. Click the **Name** of your Recovery Plan to monitor status of plan execution. Select **Tasks > Failover** for full details.
 
@@ -164,3 +180,46 @@ Before performing our failover, we'll make a quick update to our application.
 #. Open `http://` `Initials-WebServer-VM-NEW-IP-Address` :5001 in another browser tab and verify the change you'd made to your application is present.
 
 Congratulations! You've completed your first DR failover with Nutaix AHV, leveraging native Leap runbook capabilities and synchronous replication.
+
+Performing An Unplanned Failback
+++++++++++++++++++++++++++++++++
+
+Before performing our failback, let's make another update to our application.
+
+#. Open http:// *Initials-WebServer-VM-IP-Address* :5001 in another browser tab.
+
+#. Under **Stores**, click **Add New Store** and fill out the required fields. Validate your new store appears in the UI.
+
+   .. figure:: images/Failover/1.png
+
+#. Log in to Prism Central for your **PrimarySite**.
+
+#. Open :fa:`bars` **> Virtual Infrastructure > VMs**.
+
+#. Select both of your VMs and click **Actions > Delete**. Confirm by clicking **Delete**.
+
+#. Open :fa:`bars` **> Policies > Recovery Plans**.
+
+#. Select your *Initials*\ **-FiestaRecovery** plan and click **Actions > Failover**.
+
+   .. figure:: images/Failover/2.png
+
+#. Under **Failover Type**, select **Unplanned Failover** and click **Failover**.
+
+   .. figure:: images/Failover/3.png
+
+#. Ignore any warnings in the Recovery AZ (*PrimarySite*) and click **Execute Anyway**.
+
+#. Click the **Name** of your Recovery Plan to monitor status of plan execution. Select **Tasks > Failover** for full details.
+
+   .. figure:: images/Failover/4.png
+
+.. note::
+
+   If you had validation warnings before initiating failover, it is normal for the *Validating Recovery Plan* step to show a Status of *Failed*.
+
+#. Once the Recovery Plan reaches 100%, open :fa:`bars` **> Virtual Infrastructure > VMs** and note the *new* IP Address of your *Initials*\ **-WebServer-...**.
+
+#. Open `http://` `Initials-WebServer-VM-NEW-IP-Address` :5001 in another browser tab and verify the change you'd made to your application is present.
+
+Congratulations! You've completed your first DR failback with Nutaix AHV, leveraging native Leap runbook capabilities and synchronous replication.
