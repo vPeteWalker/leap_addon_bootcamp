@@ -1,5 +1,6 @@
 #!/bin/bash
 set -ex
+
 # GET PREVIOUS DB IP ADDRESS FROM CONFIG
 DB_ADDRESS=$(awk '/DB_HOST_ADDRESS:/{print}' /home/centos/Fiesta/config/config.js)
 OLD_IP="$(grep -oE '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' <<< $DB_ADDRESS)"
