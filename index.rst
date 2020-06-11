@@ -111,6 +111,7 @@ Lab Requirements
 
    **Recommended IPAM pools when using HPOC**
 
+- 4 node cluster
    - Primary
       - Range = .50 - .125
       - IPAM DHCP = .126
@@ -120,6 +121,14 @@ Lab Requirements
       - Range = .132 - .253
       - IPAM DHCP = .254
       - (122 available IPs)
+
+|
+
+- Single node cluster (SNC) - **Position B example**
+   - Primary
+      - Range = .80 - .125
+      - IPAM DHCP = .126
+      - (46 available IPs)
 
 |
 
@@ -268,17 +277,19 @@ You can use Blueprints to model applications of various complexities; from simpl
 
 
 
-#. In order to launch the Blueprint you must first assign a network to the VM. Select the **NodeReact** Service, and in the **VM** Configuration menu on the right, select *Your Preferred Network* as the **NIC 1** network.
+#. Expand the *db_password* section, and within the *Value* entry, type *nutanix/4u* as the password.
+
+   .. figure:: images/Calm/4.png
+
+
+
+#. Select the **NodeReact** Service, and in the **VM** Configuration menu on the right, select *Your Preferred Network* as the **NIC 1** network.
 
    .. figure:: images/Calm/3.png
 
 
 
 #. Repeat the **NIC 1** assignment for the **MySQL** Service.
-
-#. Expand the *db_password* section, and within the *Value* entry, type *nutanix/4u* as the password.
-
-   .. figure:: images/Calm/4.png
 
 
 
@@ -342,7 +353,7 @@ Deploy a multi-VM application via Calm
 
 
 
-#. Monitor the status of the application in the **Audit** tab and proceed once your application enters a **Running** state.
+#. Monitor the status of the application in the **Audit** tab, and proceed only once your application enters a **Running** state.
 
 #. On the **Services** tab, select the **NodeReact** service and note the IP Address. This is the web server hosting the front end of your application.
 
