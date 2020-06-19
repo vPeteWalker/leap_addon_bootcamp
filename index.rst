@@ -6,9 +6,13 @@
   :caption: Setup and Requirements
   :name: index
 
+  index
+
   :maxdepth: 2
   :caption: Unplanned Failover (UPFO)
   :name: onpremleap2_UPFO/onpremleap2_UPFO
+
+  onpremleap2_UPFO/onpremleap2_UPFO
 
 .. :maxdepth: 2
 .. :caption: [FUTURE] Planned Failover (PFO)
@@ -16,8 +20,6 @@
 .. :hidden:
 ..
 .. onpremleap3_PFO/onpremleap3_PFO
-
-.. _onpremleap1_setup:
 
 ----------------------
 Setup and Requirements
