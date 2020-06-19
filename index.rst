@@ -6,8 +6,6 @@
   :caption: Setup and Requirements
   :name: index
 
-  index
-
   :maxdepth: 2
   :caption: Unplanned Failover (UPFO)
   :name: onpremleap2_UPFO/onpremleap2_UPFO
