@@ -1,10 +1,18 @@
 .. title:: Leap Add-on Bootcamp
 
 .. toctree::
+
+  :numbered
+  :maxdepth: 2
+  :caption: Setup and Requirements
+  :name: index
+
+  index
+
+  :numbered
   :maxdepth: 2
   :caption: Unplanned Failover (UPFO)
   :name: onpremleap2_UPFO/onpremleap2_UPFO
-  :hidden:
 
   onpremleap2_UPFO/onpremleap2_UPFO
 
@@ -246,7 +254,9 @@ Calm configuration
 
 #. Click **Save & Configure Environment**.
 
-This will redirect you to the Envrionments page, but there is nothing needed to configure here. You may now move on to the next step.
+.. note::
+
+   This will redirect you to the *Environments* page. There is nothing needed to configure here. Move on to the **Staging Blueprints** step.
 
 |
 
