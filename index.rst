@@ -1,23 +1,14 @@
 .. title:: Leap Add-on Bootcamp
 
 .. toctree::
+   :maxdepth: 2
+   :caption: Setup and Requirements
+   :name: _setup_requirements
+   :hidden:
 
-  :maxdepth: 2
-  :caption: Setup and Requirements
-  :name: index
+   onpremleap2_UPFO/onpremleap2_UPFO
 
-  :maxdepth: 2
-  :caption: Unplanned Failover (UPFO)
-  :name: onpremleap2_UPFO/onpremleap2_UPFO
-
-  onpremleap2_UPFO/onpremleap2_UPFO
-
-.. :maxdepth: 2
-.. :caption: [FUTURE] Planned Failover (PFO)
-.. :name: onpremleap3_PFO/onpremleap3_PFO
-.. :hidden:
-..
-.. onpremleap3_PFO/onpremleap3_PFO
+.. _setup_requirements:
 
 ----------------------
 Setup and Requirements
