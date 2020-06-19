@@ -2,19 +2,13 @@
 
 .. toctree::
 
-  :numbered
   :maxdepth: 2
   :caption: Setup and Requirements
   :name: index
 
-  index
-
-  :numbered
   :maxdepth: 2
   :caption: Unplanned Failover (UPFO)
   :name: onpremleap2_UPFO/onpremleap2_UPFO
-
-  onpremleap2_UPFO/onpremleap2_UPFO
 
 .. :maxdepth: 2
 .. :caption: [FUTURE] Planned Failover (PFO)
