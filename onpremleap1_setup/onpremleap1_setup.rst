@@ -21,7 +21,7 @@ Leap Requirements
 
 #. The clusters on the primary availability zone (site) and the recovery site communicate over the ports 2030, 2036, 2073, and 2090. Ensure that these ports have open access between both the primary cluster and recovery clusters (Prism Elements). For more information about the required ports, see General Requirements of Leap.
 
-   .. note:: **This step is necessary even if using two HPOC clusters in the same datacenter**
+   **This step is necessary even if using two HPOC clusters in the same datacenter**
 
    To open the ports for communication to the *RecoverySite* cluster, run the following command on any CVM of the **PrimarySite** cluster by remoting in via SSH. Add or remove CVM entries to the examples below, depending on the cluster size you are utiizing, being sure to include every CVM in each cluster.
 
@@ -33,6 +33,7 @@ Leap Requirements
 
    - Replace *remote_virtual_ip* with the virtual IP address of the *RecoverySite* cluster.
 
+|
 
    To open the ports for communication to the *PrimarySite* cluster, run the following command on any CVM of the **RecoverySite** cluster.
 
@@ -44,19 +45,19 @@ Leap Requirements
 
    - Replace *source_virtual_ip* with the virtual IP address of the *PrimarySite* cluster.
 
+|
 
+   Example to run on *PrimarySite* with four nodes (destination addresses are for *RecoverySite*)
 
-   .. note:: Example to run on *PrimarySite* with four nodes (destination addresses are for *RecoverySite*)
+      .. code-block:: bash
+            allssh 'modify_firewall -f -o open -r 10.38.212.29/25,10.38.212.30/25,10.38.212.31/25,10.38.212.32/25,10.38.212.37/25 -p 2030,2036,2073,2090 -i eth0'
 
-   .. code-block:: bash
-         allssh 'modify_firewall -f -o open -r 10.38.212.29/25,10.38.212.30/25,10.38.212.31/25,10.38.212.32/25,10.38.212.37/25 -p 2030,2036,2073,2090 -i eth0'
+   Example to run on *RecoverySite* with four nodes (destination addresses are for *PrimarySite*)
 
+      .. code-block:: bash
+         allssh 'modify_firewall -f -o open -r 10.42.54.29/25,10.42.54.30/25,10.42.54.31/25,10.42.54.32/25,10.42.54.37/25 -p 2030,2036,2073,2090 -i eth0'
 
-
-   .. note:: Example to run on *RecoverySite* with four nodes (destination addresses are for *PrimarySite*)
-
-   .. code-block:: bash
-      allssh 'modify_firewall -f -o open -r 10.42.54.29/25,10.42.54.30/25,10.42.54.31/25,10.42.54.32/25,10.42.54.37/25 -p 2030,2036,2073,2090 -i eth0'
+|
 
    You may now exit your SSH client by typing **exit** or **logout**.
 
