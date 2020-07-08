@@ -4,12 +4,43 @@
 Unplanned Failover with Leap
 ----------------------------
 
+Instructor lead
++++++++++++++++
+
+Enable Leap
+...........
+
+#. Within *PrimarySite Prism Central*, select :fa:`bars` **> Prism Central Settings**.
+
+#. In *Setup* section, click **Enable Leap > Enable**.
+
+#. Within *RecoverySite Prism Central*, select :fa:`bars` **> Prism Central Settings**.
+
+#. In *Setup* section, click **Enable Leap > Enable**.
+
+Creating a new Availability Zone
+................................
+
+#. Log in to Prism Central for your **PrimarySite** cluster.
+
+#. Open :fa:`bars` **> Administration > Availability Zones** and observe that a Local AZ has already been created by default. Click **Connect to Availability Zone**
+
+.. figure:: images/AZ/1.png
+
+#. In the *Availability Zone Type* dropdown, select **Physical Location**. Enter the IP, username, and password for the **RecoverySite** PC, and click **Connect**.
+
+.. figure:: images/AZ/2.png
+
+.. figure:: images/AZ/3.png
+
+#. Observe that the **RecoverySite** cluster is now listed as *Physical*, and its *Connectivity Status* is listed as *Reachable*
+
 Staging Guest Script
 ++++++++++++++++++++
 
 New in 5.17, Leap allows you to execute scripts within a guest to update configuration files or perform other critical functions as part of the runbook. In this exercise, you'll stage a script on your WebServer VM that will update its configuration file responsible for the MySQL VM connection, allowing the WebServer to connect to the MySQL database after failover to our **RecoverySite** network.
 
-#. SSH into your *Initials*\ **-WebServer-...** VM using the following credentials:
+#. SSH into your *Initials*\ **-WebServer** VM using the following credentials:
 
    - **User Name** - centos
    - **Password** - nutanix/4u
@@ -24,7 +55,7 @@ New in 5.17, Leap allows you to execute scripts within a guest to update configu
 
    .. note::
 
-      Run ``sudo cat /usr/local/sbin/production_vm_recovery`` to view the contents of the failover script``.
+      Run ``sudo cat /usr/local/sbin/production_vm_recovery`` to view the contents of the failover script.
 
 Creating A Protection Policy
 ++++++++++++++++++++++++++++
@@ -83,7 +114,7 @@ Creating A Recovery Plan
 
 #. Under **Power On Sequence** we will add our VMs in stages to the plan. Click **+ Add Entities**.
 
-#. Select your *Initials*\ **-MySQL-...** VM and click **Add**.
+#. Select your *Initials*\ **-MySQL** VM and click **Add**.
 
    .. figure:: images/Recovery/1.png
 
@@ -91,9 +122,9 @@ Creating A Recovery Plan
 
    .. figure:: images/Recovery/2.png
 
-#. Select your *Initials*\ **-WebServer-...** VM and click **Add**.
+#. Select your *Initials*\ **-WebServer** VM and click **Add**.
 
-#. Select your *Initials*\ **-WebServer-...** VM and click **Manage Scripts > Enable**. This will run the **production_vm_recovery** script within the guest VM you staged in a previous exercise.
+#. Select your *Initials*\ **-WebServer** VM and click **Manage Scripts > Enable**. This will run the **production_vm_recovery** script within the guest VM you staged in a previous exercise.
 
    .. figure:: images/Recovery/3.png
 
@@ -122,9 +153,9 @@ Creating A Recovery Plan
 
    In this step you will configure network settings which enable you to map networks in the local availability zone (*PrimarySite*) to networks at the recovery location (*RecoverySite*).
 
-#. Select the networks where your VMs reside for **Local AZ (Primary) - Production** and **Local AZ (Primary) - Test Failback**. Repeat for **PC_ *RecoverySite PC IP* (Recovery) - Production** and ** PC_ *RecoverySite PC IP* (Recovery) - Test Failback.**
+#. Select **VM Network** for all *Virtual Network or Port Group* entries.
 
-   .. figure:: images/Recovery/5.png
+   .. figure:: images/15.png
 
 #. Click **Done**.
 
@@ -147,7 +178,7 @@ In this exercise, we will be connecting to an on-prem Prism Central at the *Reco
 
 Before performing our failover, let's make a quick update to our application.
 
-#. Open http:// *Initials-WebServer-VM-IP-Address* :5001 in another browser tab.
+#. Open ``http://*Initials-WebServer-IP-address*:5001`` in another browser tab. (ex. http://10.42.212.50:5001)
 
 #. Under **Stores**, click **Add New Store** and fill out the required fields. Validate your new store appears in the UI.
 
@@ -167,17 +198,17 @@ Before performing our failover, let's make a quick update to our application.
 
 #. Ignore any warnings in the Recovery AZ (*RecoverySite*) and click **Execute Anyway**.
 
-#. Click the **Name** of your Recovery Plan to monitor status of plan execution. Select **Tasks > Failover** for full details.
+#. Click on *Initials*\ **-FiestaRecovery** to monitor status of plan execution. Select **Tasks > Failover** for full details.
 
    .. figure:: images/Failover/4.png
 
-.. note::
+   .. note::
 
-   If you had validation warnings before initiating failover, it is normal for the *Validating Recovery Plan* step to show a Status of *Failed*.
+      If you had validation warnings before initiating failover, it is normal for the *Validating Recovery Plan* step to show a Status of *Failed*.
 
-#. Once the Recovery Plan reaches 100%, open :fa:`bars` **> Virtual Infrastructure > VMs** and note the *new* IP Address of your *Initials*\ **-WebServer-...**.
+#. Once the Recovery Plan reaches 100%, open :fa:`bars` **> Virtual Infrastructure > VMs** and note the *new* IP Address of your *Initials*\ **-WebServer**.
 
-#. Open `http://` `Initials-WebServer-VM-NEW-IP-Address` :5001 in another browser tab and verify the change you'd made to your application is present.
+#. Open `http://` `*Initials-WebServer-VM-NEW-IP-Address*`:5001 in another browser tab and verify the change you'd made to your application is present.
 
 Congratulations! You've completed your first DR failover with Nutaix AHV, leveraging native Leap runbook capabilities and synchronous replication.
 
@@ -218,7 +249,7 @@ Before performing our failback, let's make another update to our application.
 
    If you had validation warnings before initiating failover, it is normal for the *Validating Recovery Plan* step to show a Status of *Failed*.
 
-#. Once the Recovery Plan reaches 100%, open :fa:`bars` **> Virtual Infrastructure > VMs** and note the *new* IP Address of your *Initials*\ **-WebServer-...**.
+#. Once the Recovery Plan reaches 100%, open :fa:`bars` **> Virtual Infrastructure > VMs** and note the *new* IP Address of your *Initials*\ **-WebServer**.
 
 #. Open `http://` `Initials-WebServer-VM-NEW-IP-Address` :5001 in another browser tab and verify the change you'd made to your application is present.
 
