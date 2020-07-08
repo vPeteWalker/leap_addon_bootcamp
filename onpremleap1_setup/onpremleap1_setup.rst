@@ -105,10 +105,9 @@ Synchronous Replication Recommendation
 .. ++++++++++++++++
 ..
 ..    - Implement staging to automate aspects of the setup process: Network creation, deployment of PC, enable Calm/Leap, deploy Calm blueprint for specified number of users, etc.
-..
 ..    - Add alternative instructions to deploying a multi-VM application via Calm (ex. customers/prospects interested in Leap, but do not own Calm)
-..
 ..    - Add Windows-based activity
+      - Protect via Categories, vs. selecting VMs
 
 Calm configuration
 ++++++++++++++++++

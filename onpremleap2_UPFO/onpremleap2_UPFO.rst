@@ -10,42 +10,44 @@ Instructor lead
 Enable Leap
 ...........
 
-#. Within *PrimarySite Prism Central*, select :fa:`bars` **> Prism Central Settings**.
+#. Within your *PrimarySite Prism Central*, select :fa:`bars` **> Prism Central Settings**.
 
-#. In *Setup* section, click **Enable Leap > Enable**.
+#. Within the *Setup* section, click **Enable Leap > Enable**.
 
 #. Within *RecoverySite Prism Central*, select :fa:`bars` **> Prism Central Settings**.
 
-#. In *Setup* section, click **Enable Leap > Enable**.
+#. Within the *Setup* section, click **Enable Leap > Enable**.
 
 Creating a new Availability Zone
 ................................
 
-#. Log in to Prism Central for your **PrimarySite** cluster.
+#. Within *PrimarySite Prism Central*, select :fa:`bars` **> Administration > Availability Zones** and observe that a Local AZ has already been created by default.
 
-#. Open :fa:`bars` **> Administration > Availability Zones** and observe that a Local AZ has already been created by default. Click **Connect to Availability Zone**
+#. Click **Connect to Availability Zone**
 
-.. figure:: images/AZ/1.png
+   .. figure:: images/AZ/1.png
 
 #. In the *Availability Zone Type* dropdown, select **Physical Location**. Enter the IP, username, and password for the **RecoverySite** PC, and click **Connect**.
 
-.. figure:: images/AZ/2.png
+   .. figure:: images/AZ/2.png
+       :align: left
 
-.. figure:: images/AZ/3.png
+   .. figure:: images/AZ/3.png
+       :align: right
 
 #. Observe that the **RecoverySite** cluster is now listed as *Physical*, and its *Connectivity Status* is listed as *Reachable*
 
 Staging Guest Script
 ++++++++++++++++++++
 
-New in 5.17, Leap allows you to execute scripts within a guest to update configuration files or perform other critical functions as part of the runbook. In this exercise, you'll stage a script on your WebServer VM that will update its configuration file responsible for the MySQL VM connection, allowing the WebServer to connect to the MySQL database after failover to our **RecoverySite** network.
+New in 5.17, Leap allows you to execute scripts within a guest to update configuration files, or perform other critical functions as part of the runbook. In this exercise, you'll stage a script on your WebServer VM that will automatically update its configured IP information for the MySQL VM connection. This modification allows the WebServer to connect to the MySQL database after failover to your **RecoverySite** network.
 
 #. SSH into your *Initials*\ **-WebServer** VM using the following credentials:
 
    - **User Name** - centos
-   - **Password** - nutanix/4u
+   - **Password**  - nutanix/4u
 
-#. Within the VM SSH session, execute the following:
+#. Within the SSH session, execute the following. Click the icon in the upper right hand corner of the below window to copy the commands to your clipboard. You may then paste that within your SSH session.
 
    .. code-block:: bash
 
@@ -55,7 +57,9 @@ New in 5.17, Leap allows you to execute scripts within a guest to update configu
 
    .. note::
 
-      Run ``sudo cat /usr/local/sbin/production_vm_recovery`` to view the contents of the failover script.
+      If you'd like to view the contents of the failover script, execute ``sudo cat /usr/local/sbin/production_vm_recovery``.
+
+#. You may now exit the SSH session.
 
 Creating A Protection Policy
 ++++++++++++++++++++++++++++
@@ -68,22 +72,25 @@ A protection policy is where you specify your Recovery Point Objectives (RPO) an
 
 #. Fill out the following fields and click **Save**.
 
-   - **Name** - *Initials*\ -FiestaProtection
-   - **Primary Cluster(s)** - PrimarySite
-   - **Recovery Location** - `PC_` *RecoverySite IP*
-   - **Target Cluster** - RecoverySite
-   - Under **Policy Type**, select **Synchronous**
-   - Under **Failure Handling**, select **Automatic**
-   - **Timeout After** - 10 Seconds
+   - **Name**                 - *Initials*\ -FiestaProtection
+   - **Primary Cluster(s)**   - PrimarySite
+   - **Recovery Location**    - PC_*RecoverySite PrismIP*
+   - **Target Cluster**       - RecoverySite
+   - **Policy Type**          - Synchronous
+   - **Failure Handling**     - Automatic
+   - **Timeout After**        - 10 Seconds
 
-   .. figure:: images/Protection/1.png
-
-   .. note::
-
-      Protection policies can be automatically applied based on Category assignment, allowing VMs to be automatically protected from their initial provisioning. We will not assign categories in this lab.
+      .. figure:: images/Protection/1.png
 
 Assigning A Protection Policy
 +++++++++++++++++++++++++++++
+
+.. note::
+
+   Protection policies can be automatically applied based on category assignment, allowing VMs to be automatically protected from their initial provisioning. You can also add VMs individually to any protection policy. Choose one of the methods below.
+
+Method 1 - Add VM to a protection policy
+........................................
 
 #. In Prism Central, open :fa:`bars` **> Virtual Infrastructure > VMs**.
 
@@ -101,8 +108,26 @@ Assigning A Protection Policy
 
    .. figure:: images/Protection/4.png
 
+Method 2 - Add category to a protection policy
+..............................................
+
+#. In Prism Central, open :fa:`bars` **> Policies > Protection Policies**.
+
+#. Select your *Initials*\ -FiestaProtection Protection Policy, and from the *Actions* dropdown, choose **Update**.
+
+#. Under *Associated Categories* add both **CalmService: MySQL** and **CalmService: NodeReact** categories.
+
+   .. figure:: images/Protection/5.png
+
 Creating A Recovery Plan
 ++++++++++++++++++++++++
+
+.. note::
+
+   Continue using the same method you chose when configuring your protection policy in the previous section.
+
+Method 1 - Add VM to a Recovery Plan
+....................................
 
 #. In Prism Central, open :fa:`bars` **> Policies > Recovery Plans**.
 
@@ -128,20 +153,48 @@ Creating A Recovery Plan
 
    .. figure:: images/Recovery/3.png
 
-   .. note::
+#. Click **+ Add Delay** between your two stages.
 
-      Leap guest script locations
-         - **Windows** (Relative to Nutanix directory in Program Files)
+   .. figure:: images/Recovery/4.png
 
-            Production: scripts/production/vm_recovery.bat
+#. Specify **60** seconds and click **Add**.
 
-            Test: scripts/test/vm_recovery.bat
+#. Click **Next**.
 
-         - **Linux**
+   In this step you will configure network settings which enable you to map networks in the local availability zone (*PrimarySite*) to networks at the recovery location (*RecoverySite*).
 
-            Production: /usr/local/sbin/production_vm_recovery
+#. Select **VM Network** for all *Virtual Network or Port Group* entries.
 
-            Test: /usr/local/sbin/test_vm_recovery for Windows and Linux guests.
+   .. figure:: images/15.png
+
+#. Click **Done**.
+
+Method 2 - Add category to a recovery plan
+..........................................
+
+#. In Prism Central, open :fa:`bars` **> Policies > Recovery Plans**.
+
+#. Click **Create Recovery Plan**.
+
+#. Select *RecoverySite PC* as your **Recovery Location** and click **Proceed**.
+
+#. Specify *Initials*\ **-FiestaRecovery** as your **Recovery Plan Name** and click **Next**.
+
+#. Under **Power On Sequence** we will add our VMs in stages to the plan. Click **+ Add Entities**.
+
+#. From the dropdown, choose **Category**. Type **CalmService** in the text box to the right, and select **CalmService: MySQL** in the lower window.
+
+   .. figure:: images/Recovery/category1.png
+
+#. Click **+ Add New Stage**. Under **Stage 2**, click **+ Add Entities**.
+
+   .. figure:: images/Recovery/category2.png
+
+#. From the dropdown, choose **Category**. Type **CalmService** in the text box to the right, and select **CalmService: NodeReact** in the lower window.
+
+#. Select your **CalmService: NodeReact** category and click **Manage Scripts > Enable**. This will run the **production_vm_recovery** script within the guest VM you staged in a previous exercise.
+
+   .. figure:: images/Recovery/category3.png
 
 #. Click **+ Add Delay** between your two stages.
 
@@ -158,6 +211,21 @@ Creating A Recovery Plan
    .. figure:: images/15.png
 
 #. Click **Done**.
+
+.. note::
+
+   Leap guest script locations
+      - **Windows** (Relative to Nutanix directory in Program Files)
+
+         Production: scripts/production/vm_recovery.bat
+
+         Test: scripts/test/vm_recovery.bat
+
+      - **Linux**
+
+         Production: /usr/local/sbin/production_vm_recovery
+
+         Test: /usr/local/sbin/test_vm_recovery for Windows and Linux guests.
 
 Performing An Unplanned Failover
 ++++++++++++++++++++++++++++++++
@@ -178,7 +246,7 @@ In this exercise, we will be connecting to an on-prem Prism Central at the *Reco
 
 Before performing our failover, let's make a quick update to our application.
 
-#. Open ``http://*Initials-WebServer-IP-address*:5001`` in another browser tab. (ex. http://10.42.212.50:5001)
+#. Open http://\ *Initials-WebServer-IP-address*:5001 in another browser tab. (ex. http://10.42.212.50:5001)
 
 #. Under **Stores**, click **Add New Store** and fill out the required fields. Validate your new store appears in the UI.
 
@@ -208,7 +276,7 @@ Before performing our failover, let's make a quick update to our application.
 
 #. Once the Recovery Plan reaches 100%, open :fa:`bars` **> Virtual Infrastructure > VMs** and note the *new* IP Address of your *Initials*\ **-WebServer**.
 
-#. Open `http://` `*Initials-WebServer-VM-NEW-IP-Address*`:5001 in another browser tab and verify the change you'd made to your application is present.
+#. Open http://\ *Initials-WebServer-VM-NEW-IP-Address*:5001 in another browser tab and verify the change you'd made to your application is present.
 
 Congratulations! You've completed your first DR failover with Nutaix AHV, leveraging native Leap runbook capabilities and synchronous replication.
 
@@ -251,6 +319,6 @@ Before performing our failback, let's make another update to our application.
 
 #. Once the Recovery Plan reaches 100%, open :fa:`bars` **> Virtual Infrastructure > VMs** and note the *new* IP Address of your *Initials*\ **-WebServer**.
 
-#. Open `http://` `Initials-WebServer-VM-NEW-IP-Address` :5001 in another browser tab and verify the change you'd made to your application is present.
+#. Open http://\ *Initials-WebServer-VM-NEW-IP-Address*:5001 in another browser tab and verify the change you'd made to your application is present.
 
 Congratulations! You've completed your first DR failback with Nutanix AHV, leveraging native Leap runbook capabilities and synchronous replication.
