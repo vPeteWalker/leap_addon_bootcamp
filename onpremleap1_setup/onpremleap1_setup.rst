@@ -6,7 +6,17 @@ Setup and Requirements
 
 Nutanix AOS 5.17 offer significant enhancements to Leap for on-premises failover operations, including support for execution of guest scripts and synchronous replication with AHV.
 
-**In this lab you deploy a multi-tier application, protect your VMs, build a Recovery Plan for runbook automation, and perform a failover operation to another Nutanix cluster.**
+In this lab you will:
+
+- Deploy a multi-tier application
+- Protect your VMs with a Protection Policy
+- Build a Recovery Plan for runbook automation
+- Use the Fiesta application to create a first store
+- Perform a failover to a physical Nutanix cluster
+- Access the Fiesta application to ensure changes were retained
+- Use the Fiesta application to create a second store
+- Perform a failback from a physical Nutanix cluster
+- Access the Fiesta application to ensure changes were retained
 
 Leap Requirements
 +++++++++++++++++
@@ -265,3 +275,18 @@ Installing Nutanix Guest Tools
 #. Once both VMs have rebooted, validate both VMs now have empty CD-ROM drives and **NGT Status** displays **Latest** in Prism Central.
 
    .. figure:: images/6.png
+
+Remove Categories
++++++++++++++++++
+
+Calm creates a number of categories when deploying a blueprint. Since these categories won't be replicated to the Recovery Site, we will remove them to avoid validation warnings or errors.
+
+#. Open :fa:`bars` **> Virtual Infrastructure > VMs**.
+
+#. Select your *Initials*\ **-WebServer** VM. Click **Actions > Manage Categories**.
+
+#. Remove all categories by clicking the **-** next to each one. Click **Save** once complete.
+
+#. Select your *Initials*\ **-MySQL** VM. Click **Actions > Manage Categories**.
+
+#. Remove all categories by clicking the **-** next to each one. Click **Save** once complete.

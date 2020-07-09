@@ -61,7 +61,7 @@ New in 5.17, Leap allows you to execute scripts within a guest to update configu
 
       If you'd like to view the contents of the failover script, execute:
 
-      ``sudo cat /usr/local/sbin/production_vm_recovery``.
+      ``sudo cat /usr/local/sbin/production_vm_recovery``
 
 #. You may now exit the SSH session.
 
@@ -174,6 +174,12 @@ Method 1 - Add VM to a Recovery Plan
 #. Select **VM Network** for all *Virtual Network or Port Group* entries.
 
    .. figure:: images/Recovery/15.png
+
+.. note::
+
+   You are able to override the IP address failover scheme by clicking the *Advance Settings > + Custom IP Mapping*. The VMs must have a static IP address assigned already, before those VMs are available in this section. You can modify the *Test Failback* (Primary Site), *Production* (Recovery Site), and *Test Failover* (Recovery Site). Click *Save* once your modifications are complete.
+
+   .. figure:: images/Recovery/customIP1.png
 
 #. Click **Done**.
 
