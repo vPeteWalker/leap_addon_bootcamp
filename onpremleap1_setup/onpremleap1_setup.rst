@@ -59,7 +59,7 @@ Leap Requirements
 
 |
 
-   You may now exit your SSH client by typing **exit** or **logout**.
+   You may now exit your SSH session.
 
 Lab Requirements
 ++++++++++++++++
@@ -210,7 +210,7 @@ You can use Blueprints to model applications of various complexities; from simpl
       gmznERCNf9Kaxl/hlyV5dZBe/2LIK+/jLGNu9EJLoraaCBFshJKF
       -----END RSA PRIVATE KEY-----
 
-   .. figure:: images/28.png
+   .. figure:: images/Calm/28.png
 
 #. Click **Save** and click **Back** once the Blueprint has completed saving.
 
@@ -228,13 +228,15 @@ We'll be utilizing Calm to quickly and easily deploy a multi-tier application (w
 #. Fill out the following fields and then click **Create** to begin provisioning your application:
 
    - **Name of the Application** - *Initials*\ -FiestaApp
-   - **user_initials** - *Initials*
+   - **user_initials**           - *Initials*
+
+
 
 #. Monitor the status of the application in the **Audit** tab and proceed once your application enters a **Running** state. This will take approximately 15 minutes to complete.
 
 #. On the **Services** tab, select the **NodeReact** service and note the IP Address. This is the web server hosting the front end of your application.
 
-#. Open http://*NodeReact-VM-IP-Address*:5001 in a new browser tab and validate you can access the Fiesta Inventory Management app.
+#. Open <http://NodeReact-VM-IP-Address:5001> in a new browser tab and validate you can access the Fiesta Inventory Management app. (ex. `<http://10.42.212.50:5001>`_)
 
    .. figure:: images/5.png
 
@@ -254,7 +256,7 @@ Installing Nutanix Guest Tools
 #. Provide the following credentials and click **Done** to begin the NGT installation:
 
    - **User Name** - centos
-   - **Password** - nutanix/4u
+   - **Password**  - nutanix/4u
 
    .. figure:: images/4c.png
 

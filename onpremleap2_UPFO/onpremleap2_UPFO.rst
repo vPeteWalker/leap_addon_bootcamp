@@ -35,7 +35,7 @@ Creating a new Availability Zone
    .. figure:: images/AZ/3.png
        :align: right
 
-#. Observe that the **RecoverySite** cluster is now listed as *Physical*, and its *Connectivity Status* is listed as *Reachable*
+#. Observe that the **RecoverySite** cluster is now listed as *Physical*, and its *Connectivity Status* is listed as *Reachable*.
 
 Staging Guest Script
 ++++++++++++++++++++
@@ -47,6 +47,8 @@ New in 5.17, Leap allows you to execute scripts within a guest to update configu
    - **User Name** - centos
    - **Password**  - nutanix/4u
 
+
+
 #. Within the SSH session, execute the following. Click the icon in the upper right hand corner of the below window to copy the commands to your clipboard. You may then paste that within your SSH session.
 
    .. code-block:: bash
@@ -57,7 +59,9 @@ New in 5.17, Leap allows you to execute scripts within a guest to update configu
 
    .. note::
 
-      If you'd like to view the contents of the failover script, execute ``sudo cat /usr/local/sbin/production_vm_recovery``.
+      If you'd like to view the contents of the failover script, execute:
+
+      ``sudo cat /usr/local/sbin/production_vm_recovery``.
 
 #. You may now exit the SSH session.
 
@@ -87,7 +91,9 @@ Assigning A Protection Policy
 
 .. note::
 
-   Protection policies can be automatically applied based on category assignment, allowing VMs to be automatically protected from their initial provisioning. You can also add VMs individually to any protection policy. Choose one of the methods below.
+   Protection policies can be automatically applied based on category assignment, allowing VMs to be automatically protected from their initial provisioning. You can also add VMs individually to any protection policy.
+
+   **Choose one of the methods below.**
 
 Method 1 - Add VM to a protection policy
 ........................................
@@ -118,6 +124,8 @@ Method 2 - Add category to a protection policy
 #. Under *Associated Categories* add both **CalmService: MySQL** and **CalmService: NodeReact** categories.
 
    .. figure:: images/Protection/5.png
+
+#. Click **Save**.
 
 Creating A Recovery Plan
 ++++++++++++++++++++++++
@@ -165,7 +173,7 @@ Method 1 - Add VM to a Recovery Plan
 
 #. Select **VM Network** for all *Virtual Network or Port Group* entries.
 
-   .. figure:: images/15.png
+   .. figure:: images/Recovery/15.png
 
 #. Click **Done**.
 
