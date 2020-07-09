@@ -230,8 +230,6 @@ We'll be utilizing Calm to quickly and easily deploy a multi-tier application (w
    - **Name of the Application** - *Initials*\ -FiestaApp
    - **user_initials** - *Initials*
 
-.. figure:: images/Calm/BPinitials.png
-
 #. Monitor the status of the application in the **Audit** tab and proceed once your application enters a **Running** state. This will take approximately 15 minutes to complete.
 
 #. On the **Services** tab, select the **NodeReact** service and note the IP Address. This is the web server hosting the front end of your application.
