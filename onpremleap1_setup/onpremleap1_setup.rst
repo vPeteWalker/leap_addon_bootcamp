@@ -49,13 +49,15 @@ Leap Requirements
 
    Example to run on *PrimarySite* with four nodes (destination addresses are for *RecoverySite*)
 
-      .. code-block:: bash
-            allssh 'modify_firewall -f -o open -r 10.38.212.29/25,10.38.212.30/25,10.38.212.31/25,10.38.212.32/25,10.38.212.37/25 -p 2030,2036,2073,2090 -i eth0'
+   .. code-block:: bash
+         allssh 'modify_firewall -f -o open -r 10.38.212.29/25,10.38.212.30/25,10.38.212.31/25,10.38.212.32/25,10.38.212.37/25 -p 2030,2036,2073,2090 -i eth0'
+
+|
 
    Example to run on *RecoverySite* with four nodes (destination addresses are for *PrimarySite*)
 
-      .. code-block:: bash
-         allssh 'modify_firewall -f -o open -r 10.42.54.29/25,10.42.54.30/25,10.42.54.31/25,10.42.54.32/25,10.42.54.37/25 -p 2030,2036,2073,2090 -i eth0'
+   .. code-block:: bash
+      allssh 'modify_firewall -f -o open -r 10.42.54.29/25,10.42.54.30/25,10.42.54.31/25,10.42.54.32/25,10.42.54.37/25 -p 2030,2036,2073,2090 -i eth0'
 
 |
 
@@ -74,33 +76,33 @@ Lab Requirements
 
 #. Configure a Primary and a VM network within Prism, including IP Address Management (IPAM) on one or both networks, including DNS, and an IP Pool. This lab requires 2 IP addresses per attendee, per physical cluster (2 at the Primary site, 2 at the Recovery site). Do not rename these networks once the lab has begun.
 
-.. note::
+   .. note::
 
-   When utilizing the HPOC, both *Primary* and *VM Network* information will be provided with your reservation.
+      When utilizing the HPOC, both *Primary* and *VM Network* information will be provided with your reservation.
 
-   If you only have a single VLAN available to you, continue to create the *VM Network* using the same VLAN information as your primary. This is to allow the instructions to be easily followed in either situation.
+      If you only have a single VLAN available to you, continue to create the *VM Network* using the same VLAN information as your primary. This is to allow the instructions to be easily followed in either situation.
 
-   Recommended IPAM pools when using HPOC
+      Recommended IPAM pools when using HPOC
 
-   - Primary
-      - Range = .50 - .125
-      - IPAM DHCP = .126
-      - (76 available IPs)
+      - Primary
+         - Range = .50 - .125
+         - IPAM DHCP = .126
+         - (76 available IPs)
 
-   - VM Network
-      - Range = .132 - .253
-      - IPAM DHCP = .254
-      - (122 available IPs)
+      - VM Network
+         - Range = .132 - .253
+         - IPAM DHCP = .254
+         - (122 available IPs)
 
-.Xi Leap Admin Guide
-+++++++++++++++++++
+Leap Administration Guide
++++++++++++++++++++++++++
 
 https://portal.nutanix.com/page/documents/details/?targetId=Xi-Leap-Admin-Guide%3AXi-Leap-Admin-Guide
 
 Synchronous Replication Recommendation
 ++++++++++++++++++++++++++++++++++++++
 
-   - For optimal performance, Nutanix recommends that the round trip latency (RTT) between clusters be less than 5 ms. Maintain adequate bandwidth to accommodate peak writes and have a redundant physical network between the clusters.
+   - For optimal performance, Nutanix recommends that the round trip latency (RTT) between clusters be less than 5 ms., maintain adequate bandwidth to accommodate peak writes, and have a redundant physical network between the clusters.
 
 .. Future Additions
 .. ++++++++++++++++
@@ -160,7 +162,7 @@ You can use Blueprints to model applications of various complexities; from simpl
 
    .. figure:: images/Calm/26.png
 
-#. On the right hand side, expand the *db_password* section, and within the *Value* entry, type *nutanix/4u* as the password.
+#. On the right hand side, expand the *db_password* section, and within the *Value* entry, type **nutanix/4u** as the password.
 
    .. figure:: images/Calm/26b.png
 
@@ -236,7 +238,7 @@ We'll be utilizing Calm to quickly and easily deploy a multi-tier application (w
 
 #. On the **Services** tab, select the **NodeReact** service and note the IP Address. This is the web server hosting the front end of your application.
 
-#. Open <http://NodeReact-VM-IP-Address:5001> in a new browser tab and validate you can access the Fiesta Inventory Management app. (ex. `<http://10.42.212.50:5001>`_)
+#. Open `<http://NodeReact-VM-IP-Address:5001>`_ in a new browser tab and validate you can access the Fiesta Inventory Management app. (ex. `<http://10.42.212.50:5001>`_)
 
    .. figure:: images/5.png
 
@@ -249,7 +251,7 @@ Installing Nutanix Guest Tools
 
    .. figure:: images/4.png
 
-#. Select **Restart as soon as the install is completed** and click **Confirm & Enter Password**.
+#. Select **Restart as soon as the install is completed**, then click **Confirm & Enter Password**.
 
    .. figure:: images/4b.png
 

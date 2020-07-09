@@ -282,9 +282,9 @@ Before performing our failover, let's make a quick update to our application.
 
       If you had validation warnings before initiating failover, it is normal for the *Validating Recovery Plan* step to show a Status of *Failed*.
 
-#. Once the Recovery Plan reaches 100%, open :fa:`bars` **> Virtual Infrastructure > VMs** and note the *new* IP Address of your *Initials*\ **-WebServer**.
+#. Once the Recovery Plan reaches 100%, open :fa:`bars` **> Virtual Infrastructure > VMs** and note the *RECOVERYSITE* IP Address of your *Initials*\ **-WebServer**.
 
-#. Open `<http://Initials-WebServer-VM-NEW-IP-Address:5001>`_ in another browser tab and verify the change you'd made to your application is present.
+#. Open `<http://Initials-WebServer-VM-RECOVERYSITE-IP-Address:5001>`_ in another browser tab and verify the change you'd made to your application is present.
 
 Congratulations! You've completed your first DR failover with Nutaix AHV, leveraging native Leap runbook capabilities and synchronous replication.
 
@@ -293,7 +293,7 @@ Performing An Unplanned Failback
 
 Before performing our failback, let's make another update to our application.
 
-#. Open `<http://Initials-WebServer-VM-IP-Address:5001>`_ in another browser tab.
+#. Open `<http://Initials-WebServer-VM-RECOVERYSITE-IP-Address:5001>`_ in another browser tab.
 
 #. Under **Stores**, click **Add New Store** and fill out the required fields. Validate your new store appears in the UI.
 
@@ -325,8 +325,8 @@ Before performing our failback, let's make another update to our application.
 
    If you had validation warnings before initiating failover, it is normal for the *Validating Recovery Plan* step to show a Status of *Failed*.
 
-#. Once the Recovery Plan reaches 100%, open :fa:`bars` **> Virtual Infrastructure > VMs** and note the *new* IP Address of your *Initials*\ **-WebServer**.
+#. Once the Recovery Plan reaches 100%, open :fa:`bars` **> Virtual Infrastructure > VMs** and note the *PRIMARYSITE* IP Address of your *Initials*\ **-WebServer**.
 
-#. Open `<http://Initials-WebServer-VM-NEW-IP-Address:5001>`_ in another browser tab and verify the change you'd made to your application is present.
+#. Open `<http://Initials-WebServer-VM-PRIMARYSITE-IP-Address:5001>`_ in another browser tab and verify the change you'd made to your application is present.
 
 Congratulations! You've completed your first DR failback with Nutanix AHV, leveraging native Leap runbook capabilities and synchronous replication.
