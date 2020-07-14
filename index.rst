@@ -16,12 +16,12 @@
 
    onpremleap2_UPFO/onpremleap2_UPFO
 
-.. .. toctree::
-..    :maxdepth: 2
-..    :caption: Planned Failover with leap
-..    :name: _onpremleap3_PFO
-..    :hidden:
-..
-..    onpremleap3_PFO/onpremleap3_PFO
+.. toctree::
+   :maxdepth: 2
+   :caption: Planned Failover with leap
+   :name: _onpremleap3_PFO
+   :hidden:
+
+   onpremleap3_PFO/onpremleap3_PFO
 
 :ref:`Setup and Requirements <onpremleap1_setup/onpremleap1_setup>`
