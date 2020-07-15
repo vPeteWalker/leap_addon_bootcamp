@@ -4,7 +4,15 @@
 Unplanned Failover with Leap
 ----------------------------
 
-In this exercise you will perform an **Unplanned** failover of your application, demonstrating what one would experience in the event of a real cluster/site failure. The key differences from a **Planned** failover are...
+There are 3 types of failovers: Test, Planned and Unplanned.
+
+- Test failovers are for testing a recovery plan. VMs are started in the test network as specified in the recovery plan. VMs at the primary location are not affected.
+
+- Planned failovers (PFO) are when disruption of services is predicted at the primary site. The recovery plan will first create a snapshot of each VM, replicates, then starts them at the recovery location. They no longer run at the primary site after a planned failover has occurred. Replication then begins in the reverse direction (from *RecoverySite* to *PrimarySite*)
+
+- Unplanned failovers (UPFO) occur when a disaster has already occurred at the primary location. VMs are recovered from the most recent snapshot, and are started at the *RecoverySite*.
+
+In this exercise you will perform an **Unplanned** failover of your application.
 
 .. note::
 
@@ -50,14 +58,14 @@ Creating a New Availability Zone
 Staging Guest Script
 ++++++++++++++++++++
 
-New in 5.17, Leap allows you to execute scripts within a guest to update configuration files, or perform other critical functions as part of the runbook. In this exercise, you'll stage a script on your WebServer VM that will automatically update its configured IP information for the MySQL VM connection. This modification allows the WebServer to connect to the MySQL database after failover to your **RecoverySite** network.
+New in 5.17, Leap allows you to execute scripts within a guest to update configuration files, or perform other critical functions as part of the runbook. In this exercise, you'll stage a script on your WebServer VM that will automatically update its configured IP information for the MySQL VM connection. This modification allows the WebServer to connect to the MySQL database after any failover or failback operation.
 
-#. SSH into your *Initials*\ **-WebServer** VM using the following credentials:
+#. SSH into your *USERXX*\ **-WebServer** VM using the following credentials:
 
    - **User Name** - centos
    - **Password**  - nutanix/4u
 
-
+|
 
 #. Within the SSH session, execute the following. Click the icon in the upper right hand corner of the below window to copy the commands to your clipboard. You may then paste that within your SSH session.
 
@@ -112,9 +120,9 @@ A protection policy is where you specify your Recovery Point Objectives (RPO) an
 
 #. Fill out the following fields and click **Save**.
 
-   - **Name**                 - *Initials*\ -FiestaProtection
+   - **Name**                 - *USERXX*\ -FiestaProtection
    - **Primary Cluster(s)**   - PrimarySite
-   - **Recovery Location**    - PC_*RecoverySite PrismIP*
+   - **Recovery Location**    - PC_*RecoverySite PC IP*
    - **Target Cluster**       - RecoverySite
    - **Policy Type**          - Synchronous
    - **Failure Handling**     - Automatic
@@ -129,16 +137,16 @@ Assigning A Protection Policy
 
    Protection policies can be automatically applied based on category assignment, allowing VMs to be automatically protected from their initial provisioning. You can also add VMs individually to any protection policy.
 
-   **Choose one of the methods below.**
+   <strong><font color="red">Choose ONE of the methods below.</strong></font>
 
-Method 1 - Add VM to a protection policy
-........................................
+Method 1 - Add VMs to a protection policy
+.........................................
 
 #. In Prism Central, open :fa:`bars` **> Virtual Infrastructure > VMs**.
 
 #. Select both of your VMs and click **Actions > Protect**.
 
-#. Select your *Initials*\ **-FiestaProtection** policy and click **Protect**.
+#. Select your *USERXX*\ **-FiestaProtection** policy and click **Protect**.
 
    .. figure:: images/Protection/2.png
 
@@ -150,12 +158,12 @@ Method 1 - Add VM to a protection policy
 
    .. figure:: images/Protection/4.png
 
-Method 2 - Add category to a protection policy
-..............................................
+Method 2 - Add categories to a protection policy
+................................................
 
 #. In Prism Central, open :fa:`bars` **> Policies > Protection Policies**.
 
-#. Select your *Initials*\ -FiestaProtection Protection Policy, and from the *Actions* dropdown, choose **Update**.
+#. Select your *USERXX*\ -FiestaProtection Protection Policy, and from the *Actions* dropdown, choose **Update**.
 
 #. Under *Associated Categories* add both **CalmService: MySQL** and **CalmService: NodeReact** categories.
 
@@ -168,10 +176,10 @@ Creating A Recovery Plan
 
 .. note::
 
-   Continue using the same method you chose when configuring your protection policy in the previous section.
+   In the below steps, choose the same method as you did when configuring your protection policy in the previous section. (e.g. choose Method 1 if you added VMs individually, or Method 2 if you added them via categories)
 
-Method 1 - Add VM to a Recovery Plan
-....................................
+Method 1 - Add VMs to a Recovery Plan
+.....................................
 
 #. In Prism Central, open :fa:`bars` **> Policies > Recovery Plans**.
 
@@ -179,11 +187,11 @@ Method 1 - Add VM to a Recovery Plan
 
 #. Select *RecoverySite PC* as your **Recovery Location** and click **Proceed**.
 
-#. Specify *Initials*\ **-FiestaRecovery** as your **Recovery Plan Name** and click **Next**.
+#. Specify *USERXX*\ **-FiestaRecovery** as your **Recovery Plan Name** and click **Next**.
 
 #. Under **Power On Sequence** we will add our VMs in stages to the plan. Click **+ Add Entities**.
 
-#. Select your *Initials*\ **-MySQL** VM and click **Add**.
+#. Select your *USERXX*\ **-MySQL** VM and click **Add**.
 
    .. figure:: images/Recovery/1.png
 
@@ -191,9 +199,9 @@ Method 1 - Add VM to a Recovery Plan
 
    .. figure:: images/Recovery/2.png
 
-#. Select your *Initials*\ **-WebServer** VM and click **Add**.
+#. Select your *USERXX*\ **-WebServer** VM and click **Add**.
 
-#. Select your *Initials*\ **-WebServer** VM and click **Manage Scripts > Enable**. This will run the **production_vm_recovery** script within the guest VM you staged in a previous exercise.
+#. Select your *USERXX*\ **-WebServer** VM and click **Manage Scripts > Enable**. This will run the **production_vm_recovery** script within the guest VM you staged in a previous exercise.
 
    .. figure:: images/Recovery/3.png
 
@@ -211,16 +219,16 @@ Method 1 - Add VM to a Recovery Plan
 
    .. figure:: images/Recovery/15.png
 
-.. note::
+   .. note::
 
-   You are able to override the IP address failover scheme by clicking the *Advance Settings > + Custom IP Mapping*. The VMs must have a static IP address assigned already, before those VMs are available in this section. You can modify the *Test Failback* (Primary Site), *Production* (Recovery Site), and *Test Failover* (Recovery Site). Click *Save* once your modifications are complete.
+      You are able to override the IP address failover scheme by clicking the *Advance Settings > + Custom IP Mapping*. The VMs must have a static IP address assigned already, before those VMs are available in this section. You can modify the *Test Failback* (Primary Site), *Production* (Recovery Site), and *Test Failover* (Recovery Site). Click *Save* once your modifications are complete.
 
-   .. figure:: images/Recovery/customIP1.png
+      .. figure:: images/Recovery/customIP1.png
 
 #. Click **Done**.
 
-Method 2 - Add category to a recovery plan
-..........................................
+Method 2 - Add categories to a recovery plan
+............................................
 
 #. In Prism Central, open :fa:`bars` **> Policies > Recovery Plans**.
 
@@ -228,7 +236,7 @@ Method 2 - Add category to a recovery plan
 
 #. Select *RecoverySite PC* as your **Recovery Location** and click **Proceed**.
 
-#. Specify *Initials*\ **-FiestaRecovery** as your **Recovery Plan Name** and click **Next**.
+#. Specify *USERXX*\ **-FiestaRecovery** as your **Recovery Plan Name** and click **Next**.
 
 #. Under **Power On Sequence** we will add our VMs in stages to the plan. Click **+ Add Entities**.
 
@@ -258,7 +266,7 @@ Method 2 - Add category to a recovery plan
 
 #. Select **VM Network** for all *Virtual Network or Port Group* entries.
 
-   .. figure:: images/15.png
+   .. figure:: images/Recovery/15.png
 
 #. Click **Done**.
 
@@ -280,14 +288,6 @@ Method 2 - Add category to a recovery plan
 Performing An Unplanned Failover
 ++++++++++++++++++++++++++++++++
 
-There are 3 types of failovers: Test, Planned and Unplanned.
-
-- Test failovers are for testing a recovery plan. VMs are started in the test network as specified in the recovery plan. VMs at the primary location are not affected.
-
-- Planned failovers (PFO) are when disruption of services is predicted at the primary site. The recovery plan will first create a snapshot of each VM, replicates, then starts them at the recovery location. They no longer run at the primary site after a planned failover has occurred. Replication then begins in the reverse direction (from *RecoverySite* to *PrimarySite*)
-
-- Unplanned failovers (UPFO) occur when a disaster has already occurred at the primary location. VMs are recovered from the most recent snapshot, and are started at the recovery site.
-
 **In this exercise, you will perform an Unplanned Failover (UPFO).**
 
 Failovers are initiated from the remote site, which can either be another on-prem Prism Central located at your DR site, or Xi Cloud Servies.
@@ -296,7 +296,7 @@ In this exercise, we will be connecting to an on-prem Prism Central at the *Reco
 
 Before performing our failover, let's make a quick update to our application.
 
-#. Open `<http://Initials-WebServer-IP-address:5001>`_ in another browser tab. (ex. `<http://10.42.212.50:5001>`_)
+#. Open `<http://USERXX-WebServer-IP-address:5001>`_ in another browser tab. (ex. `<http://10.42.212.50:5001>`_)
 
 #. Under **Stores**, click **Add New Store** and fill out the required fields. Validate your new store appears in the UI.
 
@@ -306,7 +306,7 @@ Before performing our failover, let's make a quick update to our application.
 
 #. Open :fa:`bars` **> Policies > Recovery Plans**.
 
-#. Select your *Initials*\ **-FiestaRecovery** plan and click **Actions > Failover**.
+#. Select your *USERXX*\ **-FiestaRecovery** plan and click **Actions > Failover**.
 
    .. figure:: images/Failover/2.png
 
@@ -316,7 +316,7 @@ Before performing our failover, let's make a quick update to our application.
 
 #. Ignore any warnings in the Recovery AZ (*RecoverySite*) and click **Execute Anyway**.
 
-#. Click on *Initials*\ **-FiestaRecovery** to monitor status of plan execution. Select **Tasks > Failover** for full details.
+#. Click on *USERXX*\ **-FiestaRecovery** to monitor status of plan execution. Select **Tasks > Failover** for full details.
 
    .. figure:: images/Failover/4.png
 
@@ -324,9 +324,9 @@ Before performing our failover, let's make a quick update to our application.
 
       If you had validation warnings before initiating failover, it is normal for the *Validating Recovery Plan* step to show a Status of *Failed*.
 
-#. Once the Recovery Plan reaches 100%, open :fa:`bars` **> Virtual Infrastructure > VMs** and note the *RECOVERYSITE* IP Address of your *Initials*\ **-WebServer**.
+#. Once the Recovery Plan reaches 100%, open :fa:`bars` **> Virtual Infrastructure > VMs** and note the *RECOVERYSITE* IP Address of your *USERXX*\ **-WebServer**.
 
-#. Open `<http://Initials-WebServer-VM-RECOVERYSITE-IP-Address:5001>`_ in another browser tab and verify the change you'd made to your application is present.
+#. Open `<http://USERXX-WebServer-VM-RECOVERYSITE-IP-Address:5001>`_ in another browser tab and verify the change you'd made to your application is present.
 
 Congratulations! You've completed your first DR failover with Nutaix AHV, leveraging native Leap runbook capabilities and synchronous replication.
 
@@ -335,7 +335,7 @@ Performing An Unplanned Failback
 
 Before performing our failback, let's make another update to our application.
 
-#. Open `<http://Initials-WebServer-VM-RECOVERYSITE-IP-Address:5001>`_ in another browser tab.
+#. Open `<http://USERXX-WebServer-VM-RECOVERYSITE-IP-Address:5001>`_ in another browser tab.
 
 #. Under **Stores**, click **Add New Store** and fill out the required fields. Validate your new store appears in the UI.
 
@@ -349,7 +349,7 @@ Before performing our failback, let's make another update to our application.
 
 #. Open :fa:`bars` **> Policies > Recovery Plans**.
 
-#. Select your *Initials*\ **-FiestaRecovery** plan and click **Actions > Failover**.
+#. Select your *USERXX*\ **-FiestaRecovery** plan and click **Actions > Failover**.
 
    .. figure:: images/Failover/2.png
 
@@ -367,8 +367,8 @@ Before performing our failback, let's make another update to our application.
 
    If you had validation warnings before initiating failover, it is normal for the *Validating Recovery Plan* step to show a Status of *Failed*.
 
-#. Once the Recovery Plan reaches 100%, open :fa:`bars` **> Virtual Infrastructure > VMs** and note the *PRIMARYSITE* IP Address of your *Initials*\ **-WebServer**.
+#. Once the Recovery Plan reaches 100%, open :fa:`bars` **> Virtual Infrastructure > VMs** and note the *PRIMARYSITE* IP Address of your *USERXX*\ **-WebServer**.
 
-#. Open `<http://Initials-WebServer-VM-PRIMARYSITE-IP-Address:5001>`_ in another browser tab and verify the change you'd made to your application is present.
+#. Open `<http://USERXX-WebServer-VM-PRIMARYSITE-IP-Address:5001>`_ in another browser tab and verify the change you'd made to your application is present.
 
 Congratulations! You've completed your first DR failback with Nutanix AHV, leveraging native Leap runbook capabilities and synchronous replication.

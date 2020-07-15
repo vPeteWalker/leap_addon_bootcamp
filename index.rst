@@ -12,11 +12,11 @@
 Overview
 ++++++++
 
-Nutanix AOS 5.17 offer significant enhancements to Leap for on-premises failover operations, including support for execution of guest scripts and synchronous replication with AHV.
+New in 5.17, Nutanix AOS offers significant enhancements to Leap for on-premises failover operations, including support for execution of guest scripts, and synchronous replication with AHV.
 
 In this lab you will:
 
-- Use a multi-tier application, Fiesta, deployed by Calm
+- Use a multi-tier application - Fiesta - deployed by Calm
 - Protect your VMs with a Protection Policy
 - Build a Recovery Plan for runbook automation
 - Create changes to the Fiesta application database
@@ -26,7 +26,7 @@ In this lab you will:
 - Perform a failback from a physical Nutanix cluster
 - Access the Fiesta application to ensure changes were retained
 
-This add-on Bootcamp provides exercises for BOTH **Unplanned** and **Planned** failover scenarios. If you plan to complete each exercise, you may skip the setup steps for the second exercise, as you will use the same VMs and Protection Plan for each. This is detailed in the introduction to each lab.
+This add-on Bootcamp provides exercises for BOTH **Unplanned** and **Planned** failover scenarios. If you plan to complete each exercise, you may skip the setup steps for the second exercise, as you will use the same VMs, Protection Policy, and Recovery Plan for both. This is detailed in the introduction to each lab.
 
 Environment Requirements
 ++++++++++++++++++++++++
@@ -39,7 +39,7 @@ Environment Requirements
 
 - You can run any standard Bootcamp staging on one cluster (e.g. **Enterprise Private Cloud Bootcamp**, **Databases: Era with MSSQL Bootcamp**, etc.)
 
-- You **must** run the **Leap Add-On Bootcamp** staging on your additional cluster.
+- You **must** run the **Leap Add-On Bootcamp** staging on your additional cluster. This additional cluster will be your **PrimarySite** cluster. Your other cluster will be your **RecoverySite** cluster.
 
 - Both clusters communicate over the following ports: 2030, 2036, 2073, and 2090. Follow the steps below to open the required ports.
 
@@ -49,9 +49,9 @@ Environment Requirements
 
    #. Run the following command on any CVM of the **PrimarySite** cluster by remoting in via SSH (e.g. ``ssh nutanix@<CLUSTER-VIRTUAL-IP>``):
 
-   .. code-block:: bash
+      .. code-block:: bash
 
-      allssh 'modify_firewall -f -p 2030,2036,2073,2090 -i eth0'
+         allssh 'modify_firewall -f -p 2030,2036,2073,2090 -i eth0'
 
    #. Run the following command on any CVM of the **RecoverySite** cluster by remoting in via SSH (e.g. ``ssh nutanix@<CLUSTER-VIRTUAL-IP>``):
 
@@ -59,12 +59,11 @@ Environment Requirements
 
          allssh 'modify_firewall -f -p 2030,2036,2073,2090 -i eth0'
 
-
    #. Exit both SSH sessions.
 
    .. note::
 
-      For more information about the required ports, see `General Requirements of Leap <https://portal.nutanix.com/page/documents/details/?targetId=Xi-Leap-Admin-Guide%3AXi-Leap-Admin-Guide>`_.
+      For more information about the required ports, see the **General Requirements of Leap** section within the `Xi Leap Administration Guide <https://portal.nutanix.com/page/documents/details/?targetId=Xi-Leap-Admin-Guide%3AXi-Leap-Admin-Guide>`_.
 
 - This staging script will automatically deploy **10** instances of the Fiesta application:
 
@@ -72,7 +71,7 @@ Environment Requirements
    - **USER02-MYSQL-...**; **USER02-WebServer-...**
    - And so on...
 
-- The instructor should assign a **USER** number to each participant. The lab guide will reference entity names with **USERxx** which should be substituted for their specific number (e.g. **USER01**).
+- The instructor should assign a **USER** number to each participant. The lab guide will reference entity names with **USERXX** which should be substituted for their specific number (e.g. **USER01**).
 
 Reference
 +++++++++
