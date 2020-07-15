@@ -4,8 +4,18 @@
 Unplanned Failover with Leap
 ----------------------------
 
-Instructor lead
-+++++++++++++++
+In this exercise you will perform an **Unplanned** failover of your application, demonstrating what one would experience in the event of a real cluster/site failure. The key differences from a **Planned** failover are...
+
+.. note::
+
+   If you have already completed the :ref:`onpremleap3_PFO` exercise, you can skip the repeat setup instructions and skip to `Performing An Unplanned Failover`_.
+
+Enabling Leap
++++++++++++++
+
+.. raw:: html
+
+   <strong><font color="red">The following steps should be performed by either the instructor or a designated user, as enabling Leap and configuring the Availability Zone are one-time operations.</font></strong>
 
 Enable Leap
 ...........
@@ -18,7 +28,7 @@ Enable Leap
 
 #. Within the *Setup* section, click **Enable Leap > Enable**.
 
-Creating a new Availability Zone
+Creating a New Availability Zone
 ................................
 
 #. Within *PrimarySite Prism Central*, select :fa:`bars` **> Administration > Availability Zones** and observe that a Local AZ has already been created by default.
@@ -64,6 +74,32 @@ New in 5.17, Leap allows you to execute scripts within a guest to update configu
       ``sudo cat /usr/local/sbin/production_vm_recovery``
 
 #. You may now exit the SSH session.
+
+Installing Nutanix Guest Tools
+++++++++++++++++++++++++++++++
+
+In order to take advantage of the guest script functionality, Nutanix Guest Tools must first be installed within the guest VMs being protected.
+
+#. Open :fa:`bars` **> Virtual Infrastructure > VMs**.
+
+#. Select both your *USERxx*\ **-WebServer** and *Userxx*\ **-MySQL** VMs. Click **Actions > Install NGT**.
+
+   .. figure:: images/22.png
+
+#. Select **Restart as soon as the install is completed**, then click **Confirm & Enter Password**.
+
+   .. figure:: images/23.png
+
+#. Provide the following credentials and click **Done** to begin the NGT installation:
+
+   - **User Name** - centos
+   - **Password**  - nutanix/4u
+
+   .. figure:: images/24.png
+
+#. Once both VMs have rebooted, validate both VMs now have empty CD-ROM drives and **NGT Status** displays **Latest** in Prism Central.
+
+   .. figure:: images/25.png
 
 Creating A Protection Policy
 ++++++++++++++++++++++++++++
