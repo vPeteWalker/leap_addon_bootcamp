@@ -51,13 +51,13 @@ Environment Requirements
 
       .. code-block:: bash
 
-         ``allssh 'modify_firewall -f -p 2030,2036,2073,2090 -i eth0'``
+         allssh 'modify_firewall -f -p 2030,2036,2073,2090 -i eth0'
 
    #. Run the following command on any CVM of the **RecoverySite** cluster by remoting in via SSH (e.g. ssh nutanix@<CLUSTER-VIRTUAL-IP>):
 
       .. code-block:: bash
 
-         ``allssh 'modify_firewall -f -p 2030,2036,2073,2090 -i eth0'``
+         allssh 'modify_firewall -f -p 2030,2036,2073,2090 -i eth0'
 
    #. Exit both SSH sessions.
 
