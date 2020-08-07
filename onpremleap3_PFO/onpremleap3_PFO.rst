@@ -6,11 +6,11 @@ Planned Failover with Leap
 
 There are 3 types of failovers: Test, Planned and Unplanned.
 
-- Test failovers are for testing a recovery plan. VMs are started in the test network as specified in the recovery plan. VMs at the primary location are not affected.
+- **Test failovers** are for testing a recovery plan. VMs are started in the test network as specified in the recovery plan. VMs at the primary location are not affected.
 
-- Planned failovers (PFO) are when disruption of services is predicted at the primary site. The recovery plan will first create a snapshot of each VM, replicates, then starts them at the recovery location. They no longer run at the primary site after a planned failover has occurred. Replication then begins in the reverse direction (from *RecoverySite* to *PrimarySite*)
+- **Planned failovers (PFO)** are when disruption of services is predicted at the primary site. The recovery plan will first create a snapshot of each VM, replicates, then starts them at the recovery location. They no longer run at the primary site after a planned failover has occurred. Replication then begins in the reverse direction (from *RecoverySite* to *PrimarySite*)
 
-- Unplanned failovers (UPFO) occur when a disaster has already occurred at the primary location. VMs are recovered from the most recent snapshot, and are started at the *RecoverySite*.
+- **Unplanned failovers (UPFO)** occur when a disaster has already occurred at the primary location. VMs are recovered from the most recent snapshot, and are started at the *RecoverySite*.
 
 In this exercise you will perform an **Planned** failover of your application.
 
@@ -64,8 +64,6 @@ New in 5.17, Leap allows you to execute scripts within a guest to update configu
 
    - **User Name** - centos
    - **Password**  - nutanix/4u
-
-|
 
 #. Within the SSH session, execute the following. Click the icon in the upper right hand corner of the below window to copy the commands to your clipboard. You may then paste that within your SSH session.
 
@@ -122,7 +120,7 @@ A protection policy is where you specify your Recovery Point Objectives (RPO) an
 
    - **Name**                 - *USERXX*\ -FiestaProtection
    - **Primary Cluster(s)**   - PrimarySite
-   - **Recovery Location**    - PC_*RecoverySite PC IP*
+   - **Recovery Location**    - ``PC_``<RECOVERY-SITE-PC-IP)
    - **Target Cluster**       - RecoverySite
    - **Policy Type**          - Synchronous
    - **Failure Handling**     - Automatic
@@ -136,6 +134,8 @@ Assigning A Protection Policy
 .. note::
 
    Protection policies can be automatically applied based on category assignment, allowing VMs to be automatically protected from their initial provisioning. You can also add VMs individually to any protection policy.
+
+.. raw:: html
 
    <strong><font color="red">Choose ONE of the methods below.</strong></font>
 
@@ -154,7 +154,7 @@ Method 1 - Add VMs to a protection policy
 
    .. figure:: images/Protection/3.png
 
-#. Observe the **Protection Status** of each of your VMs move to **Synced**. Do not proceed unless this is complete.
+#. Observe the **Protection Status*q* of each of your VMs move to **Synced**. Do not proceed unless this is complete.
 
    .. figure:: images/Protection/4.png
 
@@ -205,7 +205,7 @@ Method 1 - Add VMs to a Recovery Plan
 
    .. figure:: images/Recovery/3.png
 
-#. Click **+ Add Delay** between your two stages.
+#. Click **+ Add Delay** between your two stages. This is to allow the SQL VM ample time to boot up, before we boot up the WebServer VM.
 
    .. figure:: images/Recovery/4.png
 
@@ -221,7 +221,7 @@ Method 1 - Add VMs to a Recovery Plan
 
    .. note::
 
-      You are able to override the IP address failover scheme by clicking the *Advance Settings > + Custom IP Mapping*. The VMs must have a static IP address assigned already, before those VMs are available in this section. You can modify the *Test Failback* (Primary Site), *Production* (Recovery Site), and *Test Failover* (Recovery Site). Click *Save* once your modifications are complete.
+      While outside the scope of this lab, you are able to override the IP address failover scheme by clicking the *Advance Settings > + Custom IP Mapping*. The VMs must have a static IP address assigned already, before those VMs are available in this section. You can modify the *Test Failback* (Primary Site), *Production* (Recovery Site), and *Test Failover* (Recovery Site). Click *Save* once your modifications are complete.
 
       .. figure:: images/Recovery/customIP1.png
 
@@ -273,6 +273,7 @@ Method 2 - Add categories to a recovery plan
 .. note::
 
    Leap guest script locations
+
       - **Windows** (Relative to Nutanix directory in Program Files)
 
          Production: scripts/production/vm_recovery.bat
@@ -288,19 +289,9 @@ Method 2 - Add categories to a recovery plan
 Performing A Planned Failover
 ++++++++++++++++++++++++++++++++
 
-There are 3 types of failovers: Test, Planned and Unplanned.
+Failovers are initiated from the remote site, which can either be another on-premises Prism Central located at your DR site, or Xi Cloud Servies.
 
-- Test failovers are for testing a recovery plan. VMs are started in the test network as specified in the recovery plan. VMs at the primary location are not affected.
-
-- Planned failovers (PFO) are when disruption of services is predicted at the primary site. The recovery plan will first create a snapshot of each VM, replicates, then starts them at the recovery location. They no longer run at the primary site after a planned failover has occurred. Replication then begins in the reverse direction (from *RecoverySite* to *PrimarySite*)
-
-- Unplanned failovers (UPFO) occur when a disaster has already occurred at the primary location. VMs are recovered from the most recent snapshot, and are started at the recovery site.
-
-**In this exercise, you will perform a Planned Failover (PFO).**
-
-Failovers are initiated from the remote site, which can either be another on-prem Prism Central located at your DR site, or Xi Cloud Servies.
-
-In this exercise, we will be connecting to an on-prem Prism Central at the *RecoverySite*, which we've already paired with the *PrimarySite* on-prem cluster.
+In this exercise, we will be connecting to an on-premises Prism Central at the *RecoverySite*, which we've already paired with the *PrimarySite* on-prem cluster.
 
 Before performing our failover, let's make a quick update to our application.
 
@@ -332,18 +323,18 @@ Before performing our failover, let's make a quick update to our application.
 
       If you had validation warnings before initiating failover, it is normal for the *Validating Recovery Plan* step to show a Status of *Failed*.
 
-#. Once the Recovery Plan reaches 100%, open :fa:`bars` **> Virtual Infrastructure > VMs** and note the *RECOVERYSITE* IP Address of your *USERXX*\ **-WebServer**.
+#. Once the Recovery Plan reaches 100%, open :fa:`bars` **> Virtual Infrastructure > VMs** and note the *RecoverySite* IP Address of your *USERXX*\ **-WebServer**.
 
 #. Open `<http://USERXX-WebServer-VM-RECOVERYSITE-IP-Address:5001>`_ in another browser tab and verify the change you'd made to your application is present.
 
 Congratulations! You've completed your first DR failover with Nutaix AHV, leveraging native Leap runbook capabilities and synchronous replication.
 
-Performing An Planned Failback
+Performing A Planned Failback
 ++++++++++++++++++++++++++++++++
 
 Before performing our failback, let's make another update to our application.
 
-#. Open `<http://USERXX-WebServer-VM-RECOVERYSITE-IP-Address:5001>`_ in another browser tab.
+#. Return to the browser tab for `<http://USERXX-WebServer-VM-RECOVERYSITE-IP-Address:5001>`_.
 
 #. Under **Stores**, click **Add New Store** and fill out the required fields. Validate your new store appears in the UI.
 
@@ -371,7 +362,7 @@ Before performing our failback, let's make another update to our application.
 
    If you had validation warnings before initiating failover, it is normal for the *Validating Recovery Plan* step to show a Status of *Failed*.
 
-#. Once the Recovery Plan reaches 100%, open :fa:`bars` **> Virtual Infrastructure > VMs** and note the *PRIMARYSITE* IP Address of your *USERXX*\ **-WebServer**.
+#. Once the Recovery Plan reaches 100%, open :fa:`bars` **> Virtual Infrastructure > VMs** and note the *PrimarySite* IP Address of your *USERXX*\ **-WebServer**.
 
 #. Open `<http://USERXX-WebServer-VM-PRIMARYSITE-IP-Address:5001>`_ in another browser tab and verify the change you'd made to your application is present.
 

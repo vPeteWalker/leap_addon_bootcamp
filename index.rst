@@ -37,11 +37,11 @@ Environment Requirements
 
       Single node clusters are supported for the **Leap Add-On Bootcamp**.
 
-- You can run any standard Bootcamp staging on one cluster (e.g. **Enterprise Private Cloud Bootcamp**, **Databases: Era with MSSQL Bootcamp**, etc.)
+- You can run any standard Bootcamp staging on one cluster (e.g. **Enterprise Private Cloud Bootcamp**, **Databases: Era with MSSQL Bootcamp**, etc.) This will be your **RecoverySite** cluster.
 
-- You **must** run the **Leap Add-On Bootcamp** staging on your additional cluster. This additional cluster will be your **PrimarySite** cluster. Your other cluster will be your **RecoverySite** cluster.
+- You **must** run the **Leap Add-On Bootcamp** staging on your additional cluster. This will be your **PrimarySite** cluster.
 
-- Both clusters communicate over the following ports: 2030, 2036, 2073, and 2090. Follow the steps below to open the required ports.
+- Follow the steps below to open the required ports: 2030, 2036, 2073, and 2090.
 
    .. note::
 
@@ -72,6 +72,8 @@ Environment Requirements
    - And so on...
 
 - The instructor should assign a **USER** number to each participant. The lab guide will reference entity names with **USERXX** which should be substituted for their specific number (e.g. **USER01**).
+
+- It is recommended to rename the clusters within Prism to **Primary** and **Recovery** respectively. This will aid in identification during the labs.
 
 Reference
 +++++++++
