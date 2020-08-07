@@ -137,6 +137,8 @@ Assigning A Protection Policy
 
    Protection policies can be automatically applied based on category assignment, allowing VMs to be automatically protected from their initial provisioning. You can also add VMs individually to any protection policy.
 
+.. raw:: html
+
    <strong><font color="red">Choose ONE of the methods below.</strong></font>
 
 Method 1 - Add VMs to a protection policy
@@ -154,7 +156,7 @@ Method 1 - Add VMs to a protection policy
 
    .. figure:: images/Protection/3.png
 
-#. Observe the **Protection Status** of each of your VMs move to **Synced**.
+#. Observe the **Protection Status** of each of your VMs move to **Synced**. Do not proceed unless this is complete.
 
    .. figure:: images/Protection/4.png
 

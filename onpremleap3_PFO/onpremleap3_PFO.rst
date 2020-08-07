@@ -154,7 +154,7 @@ Method 1 - Add VMs to a protection policy
 
    .. figure:: images/Protection/3.png
 
-#. Observe the **Protection Status** of each of your VMs move to **Synced**.
+#. Observe the **Protection Status** of each of your VMs move to **Synced**. Do not proceed unless this is complete.
 
    .. figure:: images/Protection/4.png
 

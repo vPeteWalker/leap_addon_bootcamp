@@ -26,7 +26,7 @@ In this lab you will:
 - Perform a failback from a physical Nutanix cluster
 - Access the Fiesta application to ensure changes were retained
 
-This add-on Bootcamp provides exercises for BOTH **Unplanned** and **Planned** failover scenarios. If you plan to complete each exercise, you may skip the setup steps for the second exercise, as you will use the same VMs, Protection Policy, and Recovery Plan for both. This is detailed in the introduction to each lab.
+This add-on Bootcamp provides exercises for BOTH **Unplanned** and **Planned** failover scenarios. If you plan to complete one exercise, you may skip the setup steps for the second exercise, as you will use the same VMs, Protection Policy, and Recovery Plan for both. This is detailed in the introduction to each lab.
 
 Environment Requirements
 ++++++++++++++++++++++++
@@ -47,17 +47,17 @@ Environment Requirements
 
       This step is necessary even if using two HPOC clusters in the same datacenter.
 
-   #. Run the following command on any CVM of the **PrimarySite** cluster by remoting in via SSH (e.g. ``ssh nutanix@<CLUSTER-VIRTUAL-IP>``):
+   #. Run the following command on any CVM of the **PrimarySite** cluster by remoting in via SSH (e.g. ssh nutanix@<CLUSTER-VIRTUAL-IP>):
 
       .. code-block:: bash
 
-         allssh 'modify_firewall -f -p 2030,2036,2073,2090 -i eth0'
+         ``allssh 'modify_firewall -f -p 2030,2036,2073,2090 -i eth0'``
 
-   #. Run the following command on any CVM of the **RecoverySite** cluster by remoting in via SSH (e.g. ``ssh nutanix@<CLUSTER-VIRTUAL-IP>``):
+   #. Run the following command on any CVM of the **RecoverySite** cluster by remoting in via SSH (e.g. ssh nutanix@<CLUSTER-VIRTUAL-IP>):
 
       .. code-block:: bash
 
-         allssh 'modify_firewall -f -p 2030,2036,2073,2090 -i eth0'
+         ``allssh 'modify_firewall -f -p 2030,2036,2073,2090 -i eth0'``
 
    #. Exit both SSH sessions.
 
