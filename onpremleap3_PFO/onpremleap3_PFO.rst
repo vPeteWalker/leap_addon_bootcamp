@@ -60,6 +60,10 @@ Staging Guest Script
 
 New in 5.17, Leap allows you to execute scripts within a guest to update configuration files, or perform other critical functions as part of the runbook. In this exercise, you'll stage a script on your WebServer VM that will automatically update its configured IP information for the MySQL VM connection. This modification allows the WebServer to connect to the MySQL database after any failover or failback operation.
 
+.. raw:: html
+
+   <strong><font color="red">The below script has already been deployed, as Calm allows for easily inserting steps (such as this script) at any point during the deployment of a blueprint. The following steps are included for illustration purposes only, so that you see how you would manually perform these steps that have been automated for you in this case.</strong></font>
+
 #. SSH into your *USERXX*\ **-WebServer** VM using the following credentials:
 
    - **User Name** - centos
@@ -69,8 +73,7 @@ New in 5.17, Leap allows you to execute scripts within a guest to update configu
 
    .. code-block:: bash
 
-      cd /usr/local/sbin
-      sudo wget https://github.com/vPeteWalker/leap_addon_bootcamp/raw/master/production_vm_recovery
+      sudo wget -O /usr/local/sbin/production_vm_recovery https://github.com/vPeteWalker/leap_addon_bootcamp/raw/master/production_vm_recovery
       sudo chmod +x /usr/local/sbin/production_vm_recovery
 
    .. note::
