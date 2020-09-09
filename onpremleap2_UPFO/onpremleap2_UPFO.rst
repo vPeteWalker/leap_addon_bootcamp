@@ -4,11 +4,6 @@
 Unplanned Failover with Leap
 ----------------------------
 
-Test
-++++
-.. image:: images/homer.gif
-
-
 There are 3 types of failovers: Test, Planned and Unplanned.
 
 - **Test failovers** are for testing a recovery plan. VMs are started in the test network as specified in the recovery plan. VMs at the primary location are not affected.
