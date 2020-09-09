@@ -18,8 +18,8 @@ In this exercise you will perform an **Unplanned** failover of your application.
 
    If you have already completed the :ref:`onpremleap3_PFO` exercise, you can skip the repeat setup instructions and skip to `Performing An Unplanned Failover`_.
 
-Enabling Leap
-+++++++++++++
+Instructor Lead
++++++++++++++++
 
 .. raw:: html
 
@@ -120,7 +120,7 @@ A protection policy is where you specify your Recovery Point Objectives (RPO) an
 
    - **Name**                 - *USERXX*\ -FiestaProtection
    - **Primary Cluster(s)**   - PrimarySite
-   - **Recovery Location**    - `PC_`<RECOVERY-SITE-PC-IP>
+   - **Recovery Location**    - `PC_<RECOVERY-SITE-PC-IP>`
    - **Target Cluster**       - RecoverySite
    - **Policy Type**          - Synchronous
    - **Failure Handling**     - Automatic

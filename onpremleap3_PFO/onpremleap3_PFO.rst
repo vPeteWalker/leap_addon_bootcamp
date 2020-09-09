@@ -120,7 +120,7 @@ A protection policy is where you specify your Recovery Point Objectives (RPO) an
 
    - **Name**                 - *USERXX*\ -FiestaProtection
    - **Primary Cluster(s)**   - PrimarySite
-   - **Recovery Location**    - `PC_`<RECOVERY-SITE-PC-IP)
+   - **Recovery Location**    - `PC_<RECOVERY-SITE-PC-IP)`
    - **Target Cluster**       - RecoverySite
    - **Policy Type**          - Synchronous
    - **Failure Handling**     - Automatic

@@ -9,6 +9,10 @@
    onpremleap3_PFO/onpremleap3_PFO
    onpremleap2_UPFO/onpremleap2_UPFO
 
+-------------------------
+Getting Started with Leap
+-------------------------
+
 Overview
 ++++++++
 
@@ -47,17 +51,25 @@ Environment Requirements
 
       This step is necessary even if using two HPOC clusters in the same datacenter.
 
-   #. Run the following command on any CVM of the **PrimarySite** cluster by remoting in via SSH (e.g. ssh nutanix@<CLUSTER-VIRTUAL-IP>):
+   #. To open the ports for communication to the recovery cluster, run the following command on all CVMs of the **PrimarySite** cluster by remoting in via SSH (e.g. ssh nutanix@<CLUSTER-VIRTUAL-IP>):
 
       .. code-block:: bash
 
-         allssh 'modify_firewall -f -p 2030,2036,2073,2090 -i eth0'
+          allssh 'modify_firewall -f -r remote_cvm_ip,remote_virtual_ip -p 2030,2036,2073,2090 -i eth0'
 
-   #. Run the following command on any CVM of the **RecoverySite** cluster by remoting in via SSH (e.g. ssh nutanix@<CLUSTER-VIRTUAL-IP>):
+      Replace remote_cvm_ip with the IP address of the recovery cluster CVM. If there are multiple CVMs, replace remote_cvm_ip with the IP addresses of the CVMs separated by comma.
+
+      Replace remote_virtual_ip with the virtual IP address of the recovery cluster.
+
+   #. To open the ports for communication to the primary cluster, run the following command on all CVMs of the **RecoverySite** cluster by remoting in via SSH (e.g. ssh nutanix@<CLUSTER-VIRTUAL-IP>):
 
       .. code-block:: bash
 
-         allssh 'modify_firewall -f -p 2030,2036,2073,2090 -i eth0'
+         allssh 'modify_firewall -f -r source_cvm_ip,source_virtual_ip -p 2030,2036,2073,2090 -i eth0'
+
+      Replace source_cvm_ip with the IP address of the primary cluster CVM. If there are multiple CVMs, replace source_cvm_ip with the IP addresses of the CVMs separated by comma.
+
+      Replace source_virtual_ip with the virtual IP address of the primary cluster.
 
    #. Exit both SSH sessions.
 
